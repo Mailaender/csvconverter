@@ -8,11 +8,16 @@ package net.openchrom.chromatogram.msd.converter.supplier.csv;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+import net.openchrom.chromatogram.msd.converter.supplier.csv.preferences.BundleProductPreferences;
+import net.openchrom.keys.preferences.IProductPreferences;
+import net.openchrom.keys.validator.ProductValidator;
+
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;
 
 	static BundleContext getContext() {
+
 		return context;
 	}
 
@@ -21,6 +26,7 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
+
 		Activator.context = bundleContext;
 	}
 
@@ -29,7 +35,18 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
+
 		Activator.context = null;
 	}
 
+	/**
+	 * Returns whether this is a valid version or not.
+	 * 
+	 * @return boolean
+	 */
+	public static boolean isValidVersion() {
+
+		IProductPreferences productPreferences = BundleProductPreferences.getProductPreferences();
+		return ProductValidator.isValidVersion(productPreferences, false);
+	}
 }
