@@ -14,6 +14,8 @@ import net.openchrom.keys.validator.ProductValidator;
 
 public class Activator implements BundleActivator {
 
+	// The plug-in ID
+	public static final String PLUGIN_ID = "net.openchrom.chromatogram.msd.converter.supplier.csv";
 	private static BundleContext context;
 
 	static BundleContext getContext() {
