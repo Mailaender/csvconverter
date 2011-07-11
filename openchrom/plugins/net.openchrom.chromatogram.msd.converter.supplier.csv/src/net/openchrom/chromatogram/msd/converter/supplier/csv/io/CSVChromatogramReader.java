@@ -21,6 +21,7 @@ import org.supercsv.prefs.CsvPreference;
 
 import net.openchrom.chromatogram.msd.converter.exceptions.FileIsEmptyException;
 import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotReadableException;
+import net.openchrom.chromatogram.msd.converter.supplier.csv.preferences.BundleProductPreferences;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVChromatogram;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVMassFragment;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVMassSpectrum;
@@ -53,7 +54,7 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 	public IChromatogram read(File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
 
 		if(isValidFileFormat(file)) {
-			return readChromatogram(file, false);	
+			return readChromatogram(file, false);
 		}
 		return null;
 	}
@@ -66,9 +67,9 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		}
 		return null;
 	}
-	
+
 	private boolean isValidFileFormat(File file) throws IOException {
-		
+
 		FileReader reader = new FileReader(file);
 		ICsvListReader csvListReader = new CsvListReader(reader, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
 		String[] header = csvListReader.getCSVHeader(true);
@@ -79,57 +80,61 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		csvListReader.close();
 		return firstColumn.equals(CSVChromatogramWriter.RT_MILLISECONDS_COLUMN);
 	}
-	
+
 	private IChromatogram readChromatogram(File file, boolean overview) throws IOException {
-		
+
 		FileReader reader = new FileReader(file);
 		ICsvListReader csvListReader = new CsvListReader(reader, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
-		
 		IChromatogram chromatogram = new CSVChromatogram();
+		if(!overview) {
+			/*
+			 * If the chromatogram shall be exportable, set the id otherwise its null or "".
+			 */
+			chromatogram.setConverterId(BundleProductPreferences.CONVERTER_ID);
+			chromatogram.setFile(file);
+		}
+		/*
+		 * Get the header inclusive m/z description.
+		 */
 		String[] header = csvListReader.getCSVHeader(true);
 		Map<Integer, Float> massFragmentsMap = getMassFragmentMap(header);
-		
 		List<String> lineEntries;
 		while((lineEntries = csvListReader.read()) != null) {
-			
 			ISupplierMassSpectrum supplierMassSpectrum = getScan(lineEntries, massFragmentsMap, overview);
+			/*
+			 * TODO setParentMassSpectrum automatisch beim Hinzufügen?
+			 */
+			supplierMassSpectrum.setParentChromatogram(chromatogram);
 			chromatogram.addScan(supplierMassSpectrum);
 		}
-		
 		int scanDelay = chromatogram.getScan(1).getRetentionTime();
 		chromatogram.setScanDelay(scanDelay);
-		
 		return chromatogram;
 	}
-	
+
 	private Map<Integer, Float> getMassFragmentMap(String[] header) {
-		
+
 		Map<Integer, Float> massFragments = new HashMap<Integer, Float>();
 		for(int index = 3; index < header.length; index++) {
-			
 			float mz = Float.valueOf(header[index]);
 			massFragments.put(index, mz);
 		}
-		
 		return massFragments;
 	}
-	
+
 	private ISupplierMassSpectrum getScan(List<String> lineEntries, Map<Integer, Float> massFragmentsMap, boolean overview) {
-		
+
 		ISupplierMassSpectrum massSpectrum = new CSVMassSpectrum();
 		String retentionTimeInMilliseconds = lineEntries.get(0);
 		int retentionTime = Integer.valueOf(retentionTimeInMilliseconds);
 		massSpectrum.setRetentionTime(retentionTime);
-		
 		/*
 		 * The retention time in minutes will be not used.
 		 */
-		//String retentionTimeInMinutes = lineEntries.get(1);
-		
+		// String retentionTimeInMinutes = lineEntries.get(1);
 		String retentionIndexValue = lineEntries.get(2);
 		float retentionIndex = Float.valueOf(retentionIndexValue);
 		massSpectrum.setRetentionIndex(retentionIndex);
-		
 		if(overview) {
 			try {
 				IMassFragment massFragment = getMassFragmentsOverview(lineEntries);
@@ -145,31 +150,27 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 				massSpectrum.addMassFragment(massFragment);
 			}
 		}
-		
 		return massSpectrum;
 	}
 
-	private IMassFragment getMassFragmentsOverview(List<String> lineEntries) throws AbundanceLimitExceededException, MZLimitExceededException { 
-		
+	private IMassFragment getMassFragmentsOverview(List<String> lineEntries) throws AbundanceLimitExceededException, MZLimitExceededException {
+
 		float abundanceTotalSignal = 0.0f;
 		for(int index = MZ_COLUMN_START; index < lineEntries.size(); index++) {
-			
 			String abundanceValue = lineEntries.get(index);
 			if(!abundanceValue.equals(ZERO_VALUE)) {
 				float abundance = Float.valueOf(abundanceValue);
 				abundanceTotalSignal += abundance;
 			}
 		}
-		
 		IMassFragment massFragment = new CSVMassFragment(AbstractMassFragment.TIC_MZ, abundanceTotalSignal);
 		return massFragment;
 	}
-	
-	private List<IMassFragment> getMassFragments(List<String> lineEntries, Map<Integer, Float> massFragmentsMap) { 
-		
+
+	private List<IMassFragment> getMassFragments(List<String> lineEntries, Map<Integer, Float> massFragmentsMap) {
+
 		List<IMassFragment> massFragments = new ArrayList<IMassFragment>();
 		for(int index = MZ_COLUMN_START; index < lineEntries.size(); index++) {
-			
 			String abundanceValue = lineEntries.get(index);
 			if(!abundanceValue.equals(ZERO_VALUE)) {
 				float abundance = Float.valueOf(abundanceValue);
@@ -184,7 +185,6 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 				}
 			}
 		}
-		
 		return massFragments;
 	}
 }

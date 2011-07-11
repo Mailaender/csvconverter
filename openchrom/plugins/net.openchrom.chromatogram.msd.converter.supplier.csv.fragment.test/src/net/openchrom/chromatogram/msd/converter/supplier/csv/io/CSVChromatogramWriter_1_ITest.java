@@ -14,11 +14,10 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotWriteableException;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.TestPathHelper;
 
-
 public class CSVChromatogramWriter_1_ITest extends ChromatogramReaderTestCase {
 
 	private ICSVChromatogramWriter chromatogramWriter;
-	
+
 	@Override
 	protected void setUp() throws Exception {
 
@@ -28,7 +27,7 @@ public class CSVChromatogramWriter_1_ITest extends ChromatogramReaderTestCase {
 	}
 
 	public void testExport_1() {
-		
+
 		File file = new File("/home/wenigmedia/Desktop/Test/OP17760.csv");
 		try {
 			chromatogramWriter.writeChromatogram(file, chromatogram, new NullProgressMonitor());
@@ -41,5 +40,4 @@ public class CSVChromatogramWriter_1_ITest extends ChromatogramReaderTestCase {
 			assertTrue("IOException", false);
 		}
 	}
-	
 }

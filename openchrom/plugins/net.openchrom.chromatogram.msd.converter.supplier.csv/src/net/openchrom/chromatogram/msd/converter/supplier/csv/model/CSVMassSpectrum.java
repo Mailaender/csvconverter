@@ -19,23 +19,12 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 	 */
 	private static final long serialVersionUID = -8416701833314906892L;
 	private static final Logger logger = Logger.getLogger(CSVMassSpectrum.class);
-	/**
-	 * MAX_MASSFRAGMENTS The total amount of mass fragments to be stored in the
-	 * Agilent chromatogram.<br/>
-	 * It does not mean, that m/z 2000 is the upper bound, but only 2000 mass
-	 * fragments can be stored in a mass spectrum.
+	/*
+	 * MIN/MAX Bounds
 	 */
 	public static final int MAX_MASSFRAGMENTS = 2000;
 	public static final int MIN_RETENTION_TIME = 0;
 	public static final int MAX_RETENTION_TIME = Integer.MAX_VALUE;
-	public static final int MIN_NWORDS = 0;
-	public static final int MAX_NWORDS = 65535;
-	public static final int MIN_DATATYPE = 0;
-	public static final int MAX_DATATYPE = 65535;
-	public static final int MIN_STATUSWORD = 0;
-	public static final int MAX_STATUSWORD = 65535;
-	public static final int MIN_UNKNOWN = 0;
-	public static final int MAX_UNKNOWN = 65535;
 
 	// -------------------------------------------ISupplierMassSpectrum
 	@Override
