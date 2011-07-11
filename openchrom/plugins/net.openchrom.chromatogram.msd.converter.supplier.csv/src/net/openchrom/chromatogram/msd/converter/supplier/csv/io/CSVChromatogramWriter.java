@@ -25,7 +25,9 @@ import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignals;
 public class CSVChromatogramWriter implements ICSVChromatogramWriter {
 	
 	public static final String RT_MILLISECONDS_COLUMN = "RT(milliseconds)";
-	
+		
+	public static final String RT_MINUTES_COLUMN = "RT(minutes) - NOT USED BY IMPORT";
+	public static final String RI_COLUMN = "RI";
 	private static final float MINUTE_FACTOR = 1000.0f * 60;
 	
 	public CSVChromatogramWriter() {
@@ -62,8 +64,8 @@ public class CSVChromatogramWriter implements ICSVChromatogramWriter {
 		List<String> headerList = new ArrayList<String>();
 		
 		headerList.add(RT_MILLISECONDS_COLUMN);
-		headerList.add("RT(minutes) - NOT USED BY IMPORT");
-		headerList.add("RI");
+		headerList.add(RT_MINUTES_COLUMN);
+		headerList.add(RI_COLUMN);
 		for(Integer mz = startMZ; mz <= stopMZ; mz++) {
 		
 			headerList.add(mz.toString());

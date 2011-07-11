@@ -4,14 +4,14 @@
    <extension
          point="net.openchrom.chromatogram.msd.converter.chromatogramSupplier">
       <ChromatogramSupplier
-            description="Exports Chromatograms to CSV."
+            description="Reads and Writes Chromatograms to CSV."
             exportConverter="net.openchrom.chromatogram.msd.converter.supplier.csv.converter.CSVChromatogramExportConverter"
             fileExtension=".CSV"
             filterName="CSV Chromatogram (*.CSV)"
             id="net.openchrom.chromatogram.msd.converter.supplier.csv"
             importConverter="net.openchrom.chromatogram.msd.converter.supplier.csv.converter.CSVChromatogramImportConverter"
             isExportable="true"
-            isImportable="false">
+            isImportable="true">
       </ChromatogramSupplier>
    </extension>
 

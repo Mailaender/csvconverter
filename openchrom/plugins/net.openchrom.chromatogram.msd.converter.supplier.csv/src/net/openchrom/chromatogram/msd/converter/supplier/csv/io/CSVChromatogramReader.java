@@ -9,7 +9,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.supercsv.io.CsvListReader;
@@ -18,8 +21,17 @@ import org.supercsv.prefs.CsvPreference;
 
 import net.openchrom.chromatogram.msd.converter.exceptions.FileIsEmptyException;
 import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotReadableException;
+import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVChromatogram;
+import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVMassFragment;
+import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVMassSpectrum;
+import net.openchrom.chromatogram.msd.model.core.AbstractMassFragment;
 import net.openchrom.chromatogram.msd.model.core.IChromatogram;
 import net.openchrom.chromatogram.msd.model.core.IChromatogramOverview;
+import net.openchrom.chromatogram.msd.model.core.IMassFragment;
+import net.openchrom.chromatogram.msd.model.core.ISupplierMassSpectrum;
+import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
+import net.openchrom.chromatogram.msd.model.exceptions.MZLimitExceededException;
+import net.openchrom.logging.core.Logger;
 
 /**
  * This class is responsible to read a Agilent Chromatogram from its binary
@@ -29,7 +41,9 @@ import net.openchrom.chromatogram.msd.model.core.IChromatogramOverview;
  */
 public class CSVChromatogramReader implements ICSVChromatogramReader {
 
-	public static final String VALID_FILE_FORMAT_CHECK = "GCMS DATA FILE";
+	private static final Logger logger = Logger.getLogger(CSVChromatogramReader.class);
+	private static final String ZERO_VALUE = "0.0";
+	private static final int MZ_COLUMN_START = 3;
 
 	public CSVChromatogramReader() {
 
@@ -39,20 +53,18 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 	public IChromatogram read(File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
 
 		if(isValidFileFormat(file)) {
-			return null;	
-		} else {
-			return null;	
+			return readChromatogram(file, false);	
 		}
+		return null;
 	}
 
 	@Override
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
 
 		if(isValidFileFormat(file)) {
-			return null;	
-		} else {
-			return null;	
+			return readChromatogram(file, true);
 		}
+		return null;
 	}
 	
 	private boolean isValidFileFormat(File file) throws IOException {
@@ -61,33 +73,118 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		ICsvListReader csvListReader = new CsvListReader(reader, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
 		String[] header = csvListReader.getCSVHeader(true);
 		/*
-		 * Check the first column
+		 * Check the first column header.
 		 */
 		String firstColumn = header[0];
+		csvListReader.close();
 		return firstColumn.equals(CSVChromatogramWriter.RT_MILLISECONDS_COLUMN);
 	}
 	
-	private IChromatogram readChromatogram(File file) throws IOException {
+	private IChromatogram readChromatogram(File file, boolean overview) throws IOException {
 		
 		FileReader reader = new FileReader(file);
 		ICsvListReader csvListReader = new CsvListReader(reader, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
 		
+		IChromatogram chromatogram = new CSVChromatogram();
 		String[] header = csvListReader.getCSVHeader(true);
+		Map<Integer, Float> massFragmentsMap = getMassFragmentMap(header);
 		
-		System.out.println(header[0]);
-		
-		
-		List<String> line;
-		while((line = csvListReader.read()) != null) {
+		List<String> lineEntries;
+		while((lineEntries = csvListReader.read()) != null) {
 			
-			String retentionTimeInMilliseconds = line.get(0);
-			String retentionTimeInMinutes = line.get(1);
-			String retentionIndex = line.get(2);
-			for(int index = 3; index < line.size(); index++) {
-				String abundance = line.get(index);
+			ISupplierMassSpectrum supplierMassSpectrum = getScan(lineEntries, massFragmentsMap, overview);
+			chromatogram.addScan(supplierMassSpectrum);
+		}
+		
+		int scanDelay = chromatogram.getScan(1).getRetentionTime();
+		chromatogram.setScanDelay(scanDelay);
+		
+		return chromatogram;
+	}
+	
+	private Map<Integer, Float> getMassFragmentMap(String[] header) {
+		
+		Map<Integer, Float> massFragments = new HashMap<Integer, Float>();
+		for(int index = 3; index < header.length; index++) {
+			
+			float mz = Float.valueOf(header[index]);
+			massFragments.put(index, mz);
+		}
+		
+		return massFragments;
+	}
+	
+	private ISupplierMassSpectrum getScan(List<String> lineEntries, Map<Integer, Float> massFragmentsMap, boolean overview) {
+		
+		ISupplierMassSpectrum massSpectrum = new CSVMassSpectrum();
+		String retentionTimeInMilliseconds = lineEntries.get(0);
+		int retentionTime = Integer.valueOf(retentionTimeInMilliseconds);
+		massSpectrum.setRetentionTime(retentionTime);
+		
+		/*
+		 * The retention time in minutes will be not used.
+		 */
+		//String retentionTimeInMinutes = lineEntries.get(1);
+		
+		String retentionIndexValue = lineEntries.get(2);
+		float retentionIndex = Float.valueOf(retentionIndexValue);
+		massSpectrum.setRetentionIndex(retentionIndex);
+		
+		if(overview) {
+			try {
+				IMassFragment massFragment = getMassFragmentsOverview(lineEntries);
+				massSpectrum.addMassFragment(massFragment);
+			} catch(AbundanceLimitExceededException e) {
+				logger.warn(e);
+			} catch(MZLimitExceededException e) {
+				logger.warn(e);
+			}
+		} else {
+			List<IMassFragment> massFragments = getMassFragments(lineEntries, massFragmentsMap);
+			for(IMassFragment massFragment : massFragments) {
+				massSpectrum.addMassFragment(massFragment);
 			}
 		}
 		
-		return null;
+		return massSpectrum;
+	}
+
+	private IMassFragment getMassFragmentsOverview(List<String> lineEntries) throws AbundanceLimitExceededException, MZLimitExceededException { 
+		
+		float abundanceTotalSignal = 0.0f;
+		for(int index = MZ_COLUMN_START; index < lineEntries.size(); index++) {
+			
+			String abundanceValue = lineEntries.get(index);
+			if(!abundanceValue.equals(ZERO_VALUE)) {
+				float abundance = Float.valueOf(abundanceValue);
+				abundanceTotalSignal += abundance;
+			}
+		}
+		
+		IMassFragment massFragment = new CSVMassFragment(AbstractMassFragment.TIC_MZ, abundanceTotalSignal);
+		return massFragment;
+	}
+	
+	private List<IMassFragment> getMassFragments(List<String> lineEntries, Map<Integer, Float> massFragmentsMap) { 
+		
+		List<IMassFragment> massFragments = new ArrayList<IMassFragment>();
+		for(int index = MZ_COLUMN_START; index < lineEntries.size(); index++) {
+			
+			String abundanceValue = lineEntries.get(index);
+			if(!abundanceValue.equals(ZERO_VALUE)) {
+				float abundance = Float.valueOf(abundanceValue);
+				float mz = massFragmentsMap.get(index);
+				try {
+					IMassFragment massFragment = new CSVMassFragment(mz, abundance);
+					massFragments.add(massFragment);
+				} catch(AbundanceLimitExceededException e) {
+					logger.warn(e);
+				} catch(MZLimitExceededException e) {
+					logger.warn(e);
+				}
+			}
+		}
+		
+		return massFragments;
 	}
 }
