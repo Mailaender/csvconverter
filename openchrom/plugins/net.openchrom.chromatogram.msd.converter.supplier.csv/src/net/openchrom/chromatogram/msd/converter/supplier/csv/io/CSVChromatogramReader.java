@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2011 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -88,7 +88,7 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		IChromatogram chromatogram = new CSVChromatogram();
 		if(!overview) {
 			/*
-			 * If the chromatogram shall be exportable, set the id otherwise its null or "".
+			 * If the chromatogram shall be exportable, set the id otherwise it is null or "".
 			 */
 			chromatogram.setConverterId(BundleProductPreferences.CONVERTER_ID);
 			chromatogram.setFile(file);
