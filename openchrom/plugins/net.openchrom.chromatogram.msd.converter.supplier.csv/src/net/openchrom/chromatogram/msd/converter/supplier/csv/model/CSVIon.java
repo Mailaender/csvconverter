@@ -5,35 +5,35 @@
  *******************************************************************************/
 package net.openchrom.chromatogram.msd.converter.supplier.csv.model;
 
-import net.openchrom.chromatogram.msd.model.core.AbstractSupplierMassFragment;
+import net.openchrom.chromatogram.msd.model.core.AbstractSupplierIon;
 import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
 import net.openchrom.chromatogram.msd.model.exceptions.MZLimitExceededException;
 
-public class CSVMassFragment extends AbstractSupplierMassFragment implements ICSVMassFragment {
+public class CSVIon extends AbstractSupplierIon implements ICSVIon {
 
 	/**
 	 * Renew the serialVersionUID any time you have changed some fields or
 	 * methods.
 	 */
 	private static final long serialVersionUID = -8157753037973736403L;
-	public static final int BINARY_MASS_FRAGMENT_LENGTH_IN_BYTES = 4;
+	public static final int BINARY_ION_LENGTH_IN_BYTES = 4;
 	public static final float MIN_ABUNDANCE = 0.0f;
 	public static final float MAX_ABUNDANCE = Float.MAX_VALUE;
 	public static final float MIN_MZ = 1.0f;
 	public static final float MAX_MZ = 50000.0f;
 
-	public CSVMassFragment(float mz) throws MZLimitExceededException {
+	public CSVIon(float mz) throws MZLimitExceededException {
 
 		super(mz);
 	}
 
-	public CSVMassFragment(float mz, boolean ignoreAbundanceLimit) throws MZLimitExceededException {
+	public CSVIon(float mz, boolean ignoreAbundanceLimit) throws MZLimitExceededException {
 
 		super(mz);
 		setIgnoreAbundanceLimit(ignoreAbundanceLimit);
 	}
 
-	public CSVMassFragment(float mz, float abundance) throws AbundanceLimitExceededException, MZLimitExceededException {
+	public CSVIon(float mz, float abundance) throws AbundanceLimitExceededException, MZLimitExceededException {
 
 		super(mz, abundance);
 	}

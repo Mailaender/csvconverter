@@ -23,12 +23,12 @@ import net.openchrom.chromatogram.msd.converter.exceptions.FileIsEmptyException;
 import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotReadableException;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.preferences.BundleProductPreferences;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVChromatogram;
-import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVMassFragment;
+import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVIon;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVMassSpectrum;
-import net.openchrom.chromatogram.msd.model.core.AbstractMassFragment;
+import net.openchrom.chromatogram.msd.model.core.AbstractIon;
 import net.openchrom.chromatogram.msd.model.core.IChromatogram;
 import net.openchrom.chromatogram.msd.model.core.IChromatogramOverview;
-import net.openchrom.chromatogram.msd.model.core.IMassFragment;
+import net.openchrom.chromatogram.msd.model.core.IIon;
 import net.openchrom.chromatogram.msd.model.core.ISupplierMassSpectrum;
 import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
 import net.openchrom.chromatogram.msd.model.exceptions.MZLimitExceededException;
@@ -97,7 +97,7 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		 * Get the header inclusive m/z description.
 		 */
 		String[] header = csvListReader.getCSVHeader(true);
-		Map<Integer, Float> massFragmentsMap = getMassFragmentMap(header);
+		Map<Integer, Float> massFragmentsMap = getIonMap(header);
 		List<String> lineEntries;
 		while((lineEntries = csvListReader.read()) != null) {
 			ISupplierMassSpectrum supplierMassSpectrum = getScan(lineEntries, massFragmentsMap, overview);
@@ -112,7 +112,7 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		return chromatogram;
 	}
 
-	private Map<Integer, Float> getMassFragmentMap(String[] header) {
+	private Map<Integer, Float> getIonMap(String[] header) {
 
 		Map<Integer, Float> massFragments = new HashMap<Integer, Float>();
 		for(int index = 3; index < header.length; index++) {
@@ -137,23 +137,23 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		massSpectrum.setRetentionIndex(retentionIndex);
 		if(overview) {
 			try {
-				IMassFragment massFragment = getMassFragmentsOverview(lineEntries);
-				massSpectrum.addMassFragment(massFragment);
+				IIon massFragment = getIonsOverview(lineEntries);
+				massSpectrum.addIon(massFragment);
 			} catch(AbundanceLimitExceededException e) {
 				logger.warn(e);
 			} catch(MZLimitExceededException e) {
 				logger.warn(e);
 			}
 		} else {
-			List<IMassFragment> massFragments = getMassFragments(lineEntries, massFragmentsMap);
-			for(IMassFragment massFragment : massFragments) {
-				massSpectrum.addMassFragment(massFragment);
+			List<IIon> massFragments = getIons(lineEntries, massFragmentsMap);
+			for(IIon massFragment : massFragments) {
+				massSpectrum.addIon(massFragment);
 			}
 		}
 		return massSpectrum;
 	}
 
-	private IMassFragment getMassFragmentsOverview(List<String> lineEntries) throws AbundanceLimitExceededException, MZLimitExceededException {
+	private IIon getIonsOverview(List<String> lineEntries) throws AbundanceLimitExceededException, MZLimitExceededException {
 
 		float abundanceTotalSignal = 0.0f;
 		for(int index = MZ_COLUMN_START; index < lineEntries.size(); index++) {
@@ -163,20 +163,20 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 				abundanceTotalSignal += abundance;
 			}
 		}
-		IMassFragment massFragment = new CSVMassFragment(AbstractMassFragment.TIC_MZ, abundanceTotalSignal);
+		IIon massFragment = new CSVIon(AbstractIon.TIC_MZ, abundanceTotalSignal);
 		return massFragment;
 	}
 
-	private List<IMassFragment> getMassFragments(List<String> lineEntries, Map<Integer, Float> massFragmentsMap) {
+	private List<IIon> getIons(List<String> lineEntries, Map<Integer, Float> massFragmentsMap) {
 
-		List<IMassFragment> massFragments = new ArrayList<IMassFragment>();
+		List<IIon> massFragments = new ArrayList<IIon>();
 		for(int index = MZ_COLUMN_START; index < lineEntries.size(); index++) {
 			String abundanceValue = lineEntries.get(index);
 			if(!abundanceValue.equals(ZERO_VALUE)) {
 				float abundance = Float.valueOf(abundanceValue);
 				float mz = massFragmentsMap.get(index);
 				try {
-					IMassFragment massFragment = new CSVMassFragment(mz, abundance);
+					IIon massFragment = new CSVIon(mz, abundance);
 					massFragments.add(massFragment);
 				} catch(AbundanceLimitExceededException e) {
 					logger.warn(e);

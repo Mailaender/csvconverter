@@ -6,7 +6,7 @@
 package net.openchrom.chromatogram.msd.converter.supplier.csv.model;
 
 import net.openchrom.chromatogram.msd.model.core.AbstractSupplierMassSpectrum;
-import net.openchrom.chromatogram.msd.model.core.IMassFragment;
+import net.openchrom.chromatogram.msd.model.core.IIon;
 import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
 import net.openchrom.chromatogram.msd.model.exceptions.MZLimitExceededException;
 import net.openchrom.logging.core.Logger;
@@ -28,7 +28,7 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 
 	// -------------------------------------------ISupplierMassSpectrum
 	@Override
-	public int getMaxPossibleMassFragments() {
+	public int getMaxPossibleIons() {
 
 		return MAX_MASSFRAGMENTS;
 	}
@@ -53,7 +53,7 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 		StringBuilder builder = new StringBuilder();
 		builder.append(super.toString());
 		builder.append(getClass().getName());
-		builder.append("maxPossibleMassFragments=" + getMaxPossibleMassFragments());
+		builder.append("maxPossibleIons=" + getMaxPossibleIons());
 		builder.append(",");
 		builder.append("maxPossibleRetentionTime=" + getMaxPossibleRetentionTime());
 		builder.append(",");
@@ -73,19 +73,19 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 	public ICSVMassSpectrum makeDeepCopy() throws CloneNotSupportedException {
 
 		ICSVMassSpectrum massSpectrum = (ICSVMassSpectrum)super.clone();
-		ICSVMassFragment massFragment;
+		ICSVIon massFragment;
 		/*
 		 * The instance variables have been copied by super.clone();.<br/> The
-		 * mass fragments in the mass fragment list need not to be removed via
-		 * removeAllMassFragments as the method super.clone() has created a new
+		 * ions in the ion list need not to be removed via
+		 * removeAllIons as the method super.clone() has created a new
 		 * list.<br/> It is necessary to fill the list again, as the abstract
-		 * super class does not know each available type of mass fragment.<br/>
-		 * Make a deep copy of all mass fragments.
+		 * super class does not know each available type of ion.<br/>
+		 * Make a deep copy of all ions.
 		 */
-		for(IMassFragment mf : getMassFragments()) {
+		for(IIon mf : getIons()) {
 			try {
-				massFragment = new CSVMassFragment(mf.getMZ(), mf.getAbundance());
-				massSpectrum.addMassFragment(massFragment);
+				massFragment = new CSVIon(mf.getMZ(), mf.getAbundance());
+				massSpectrum.addIon(massFragment);
 			} catch(AbundanceLimitExceededException e) {
 				logger.warn(e);
 			} catch(MZLimitExceededException e) {
