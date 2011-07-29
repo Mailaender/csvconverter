@@ -22,7 +22,7 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 	/*
 	 * MIN/MAX Bounds
 	 */
-	public static final int MAX_MASSFRAGMENTS = 2000;
+	public static final int MAX_ionS = 2000;
 	public static final int MIN_RETENTION_TIME = 0;
 	public static final int MAX_RETENTION_TIME = Integer.MAX_VALUE;
 
@@ -30,7 +30,7 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 	@Override
 	public int getMaxPossibleIons() {
 
-		return MAX_MASSFRAGMENTS;
+		return MAX_ionS;
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 	public ICSVMassSpectrum makeDeepCopy() throws CloneNotSupportedException {
 
 		ICSVMassSpectrum massSpectrum = (ICSVMassSpectrum)super.clone();
-		ICSVIon massFragment;
+		ICSVIon ion;
 		/*
 		 * The instance variables have been copied by super.clone();.<br/> The
 		 * ions in the ion list need not to be removed via
@@ -84,8 +84,8 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 		 */
 		for(IIon mf : getIons()) {
 			try {
-				massFragment = new CSVIon(mf.getMZ(), mf.getAbundance());
-				massSpectrum.addIon(massFragment);
+				ion = new CSVIon(mf.getMZ(), mf.getAbundance());
+				massSpectrum.addIon(ion);
 			} catch(AbundanceLimitExceededException e) {
 				logger.warn(e);
 			} catch(MZLimitExceededException e) {

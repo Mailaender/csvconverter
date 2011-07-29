@@ -97,10 +97,10 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		 * Get the header inclusive m/z description.
 		 */
 		String[] header = csvListReader.getCSVHeader(true);
-		Map<Integer, Float> massFragmentsMap = getIonMap(header);
+		Map<Integer, Float> ionsMap = getIonMap(header);
 		List<String> lineEntries;
 		while((lineEntries = csvListReader.read()) != null) {
-			ISupplierMassSpectrum supplierMassSpectrum = getScan(lineEntries, massFragmentsMap, overview);
+			ISupplierMassSpectrum supplierMassSpectrum = getScan(lineEntries, ionsMap, overview);
 			/*
 			 * TODO setParentMassSpectrum automatisch beim Hinzufügen?
 			 */
@@ -114,15 +114,15 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 
 	private Map<Integer, Float> getIonMap(String[] header) {
 
-		Map<Integer, Float> massFragments = new HashMap<Integer, Float>();
+		Map<Integer, Float> ions = new HashMap<Integer, Float>();
 		for(int index = 3; index < header.length; index++) {
 			float mz = Float.valueOf(header[index]);
-			massFragments.put(index, mz);
+			ions.put(index, mz);
 		}
-		return massFragments;
+		return ions;
 	}
 
-	private ISupplierMassSpectrum getScan(List<String> lineEntries, Map<Integer, Float> massFragmentsMap, boolean overview) {
+	private ISupplierMassSpectrum getScan(List<String> lineEntries, Map<Integer, Float> ionsMap, boolean overview) {
 
 		ISupplierMassSpectrum massSpectrum = new CSVMassSpectrum();
 		String retentionTimeInMilliseconds = lineEntries.get(0);
@@ -137,17 +137,17 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		massSpectrum.setRetentionIndex(retentionIndex);
 		if(overview) {
 			try {
-				IIon massFragment = getIonsOverview(lineEntries);
-				massSpectrum.addIon(massFragment);
+				IIon ion = getIonsOverview(lineEntries);
+				massSpectrum.addIon(ion);
 			} catch(AbundanceLimitExceededException e) {
 				logger.warn(e);
 			} catch(MZLimitExceededException e) {
 				logger.warn(e);
 			}
 		} else {
-			List<IIon> massFragments = getIons(lineEntries, massFragmentsMap);
-			for(IIon massFragment : massFragments) {
-				massSpectrum.addIon(massFragment);
+			List<IIon> ions = getIons(lineEntries, ionsMap);
+			for(IIon ion : ions) {
+				massSpectrum.addIon(ion);
 			}
 		}
 		return massSpectrum;
@@ -163,21 +163,21 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 				abundanceTotalSignal += abundance;
 			}
 		}
-		IIon massFragment = new CSVIon(AbstractIon.TIC_MZ, abundanceTotalSignal);
-		return massFragment;
+		IIon ion = new CSVIon(AbstractIon.TIC_MZ, abundanceTotalSignal);
+		return ion;
 	}
 
-	private List<IIon> getIons(List<String> lineEntries, Map<Integer, Float> massFragmentsMap) {
+	private List<IIon> getIons(List<String> lineEntries, Map<Integer, Float> ionsMap) {
 
-		List<IIon> massFragments = new ArrayList<IIon>();
+		List<IIon> ions = new ArrayList<IIon>();
 		for(int index = MZ_COLUMN_START; index < lineEntries.size(); index++) {
 			String abundanceValue = lineEntries.get(index);
 			if(!abundanceValue.equals(ZERO_VALUE)) {
 				float abundance = Float.valueOf(abundanceValue);
-				float mz = massFragmentsMap.get(index);
+				float mz = ionsMap.get(index);
 				try {
-					IIon massFragment = new CSVIon(mz, abundance);
-					massFragments.add(massFragment);
+					IIon ion = new CSVIon(mz, abundance);
+					ions.add(ion);
 				} catch(AbundanceLimitExceededException e) {
 					logger.warn(e);
 				} catch(MZLimitExceededException e) {
@@ -185,6 +185,6 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 				}
 			}
 		}
-		return massFragments;
+		return ions;
 	}
 }
