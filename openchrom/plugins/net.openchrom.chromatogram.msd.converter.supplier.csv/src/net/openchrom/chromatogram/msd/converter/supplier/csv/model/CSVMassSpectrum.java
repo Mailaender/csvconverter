@@ -22,7 +22,7 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 	/*
 	 * MIN/MAX Bounds
 	 */
-	public static final int MAX_ionS = 2000;
+	public static final int MAX_IONS = 2000;
 	public static final int MIN_RETENTION_TIME = 0;
 	public static final int MAX_RETENTION_TIME = Integer.MAX_VALUE;
 
@@ -30,7 +30,7 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 	@Override
 	public int getMaxPossibleIons() {
 
-		return MAX_ionS;
+		return MAX_IONS;
 	}
 
 	@Override
