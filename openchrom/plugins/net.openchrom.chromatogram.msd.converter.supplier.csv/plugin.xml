@@ -6,8 +6,8 @@
       <ChromatogramSupplier
             description="Reads and Writes Chromatograms to CSV."
             exportConverter="net.openchrom.chromatogram.msd.converter.supplier.csv.converter.CSVChromatogramExportConverter"
-            fileExtension=".CSV"
-            filterName="CSV Chromatogram (*.CSV)"
+            fileExtension=".csv"
+            filterName="CSV Chromatogram (*.csv)"
             id="net.openchrom.chromatogram.msd.converter.supplier.csv"
             importConverter="net.openchrom.chromatogram.msd.converter.supplier.csv.converter.CSVChromatogramImportConverter"
             isExportable="true"

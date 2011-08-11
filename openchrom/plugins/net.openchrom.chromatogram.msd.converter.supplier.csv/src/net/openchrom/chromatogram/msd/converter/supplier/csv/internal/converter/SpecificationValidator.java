@@ -21,12 +21,12 @@ public class SpecificationValidator {
 		File validFile;
 		String path = file.getAbsolutePath().toUpperCase();
 		if(file.isDirectory()) {
-			validFile = new File(file.getAbsolutePath() + File.separator + "CHROMATOGRAM.CSV");
+			validFile = new File(file.getAbsolutePath() + File.separator + "CHROMATOGRAM.csv");
 		} else {
 			if(path.endsWith(".")) {
-				validFile = new File(file.getAbsolutePath() + "CSV");
-			} else if(!path.endsWith(".CSV")) {
-				validFile = new File(file.getAbsolutePath() + ".CSV");
+				validFile = new File(file.getAbsolutePath() + "csv");
+			} else if(!path.endsWith(".csv")) {
+				validFile = new File(file.getAbsolutePath() + ".csv");
 			} else {
 				validFile = file;
 			}
