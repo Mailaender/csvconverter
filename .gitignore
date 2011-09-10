@@ -10,3 +10,4 @@ openchrom/updateSites/net.openchrom.chromatogram.msd.converter.supplier.csv.upda
 openchrom/updateSites/net.openchrom.chromatogram.msd.converter.supplier.csv.updateSite/content.jar
 openchrom/updateSites/net.openchrom.chromatogram.msd.converter.supplier.csv.updateSite/features/
 openchrom/updateSites/net.openchrom.chromatogram.msd.converter.supplier.csv.updateSite/plugins/
+openchrom/plugins/net.openchrom.chromatogram.msd.converter.supplier.csv.fragment.test/testData/files/export/Test.csv

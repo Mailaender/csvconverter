@@ -19,7 +19,7 @@ public class SpecificationValidator {
 	public static File validateCSVSpecification(File file) {
 
 		File validFile;
-		String path = file.getAbsolutePath().toUpperCase();
+		String path = file.getAbsolutePath().toLowerCase();
 		if(file.isDirectory()) {
 			validFile = new File(file.getAbsolutePath() + File.separator + "CHROMATOGRAM.csv");
 		} else {
