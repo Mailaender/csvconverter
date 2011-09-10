@@ -22,13 +22,8 @@ public class BundleProductPreferences {
 	 * "save" or CTRL+S on an open chromatogram editor. The editor itself has a
 	 * method "doSave(...)" which will be called.
 	 */
-	// private static final int P_TRIAL_DAYS = 30;
-	// public static final String P_PRODUCT_ID = "net.openchrom.chromatogram.msd.converter.supplier.csv.reader";
-	// private static final String PRODUCT_INFO = "You can achieve a product serial key free of charge, registering on the projects web site.";
-	// public static final String CONVERTER_ID = ""; // Must be "", it should be not possible to save the chromatogram using the chromatogram editor.
 	/*
 	 * Full version (read/write option).
-	 * ---30 days are used for JUnit tests.---
 	 */
 	private static final int P_TRIAL_DAYS = 30;
 	public static final String P_PRODUCT_ID = "net.openchrom.chromatogram.msd.converter.supplier.csv";
