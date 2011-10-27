@@ -8,7 +8,7 @@ package net.openchrom.chromatogram.msd.converter.supplier.csv.model;
 import net.openchrom.chromatogram.msd.model.core.AbstractSupplierMassSpectrum;
 import net.openchrom.chromatogram.msd.model.core.IIon;
 import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
-import net.openchrom.chromatogram.msd.model.exceptions.MZLimitExceededException;
+import net.openchrom.chromatogram.msd.model.exceptions.IonLimitExceededException;
 import net.openchrom.logging.core.Logger;
 
 public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICSVMassSpectrum {
@@ -73,7 +73,7 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 	public ICSVMassSpectrum makeDeepCopy() throws CloneNotSupportedException {
 
 		ICSVMassSpectrum massSpectrum = (ICSVMassSpectrum)super.clone();
-		ICSVIon ion;
+		ICSVIon csvIon;
 		/*
 		 * The instance variables have been copied by super.clone();.<br/> The
 		 * ions in the ion list need not to be removed via
@@ -82,13 +82,13 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 		 * super class does not know each available type of ion.<br/>
 		 * Make a deep copy of all ions.
 		 */
-		for(IIon mf : getIons()) {
+		for(IIon ion : getIons()) {
 			try {
-				ion = new CSVIon(mf.getMZ(), mf.getAbundance());
-				massSpectrum.addIon(ion);
+				csvIon = new CSVIon(ion.getIon(), ion.getAbundance());
+				massSpectrum.addIon(csvIon);
 			} catch(AbundanceLimitExceededException e) {
 				logger.warn(e);
-			} catch(MZLimitExceededException e) {
+			} catch(IonLimitExceededException e) {
 				logger.warn(e);
 			}
 		}

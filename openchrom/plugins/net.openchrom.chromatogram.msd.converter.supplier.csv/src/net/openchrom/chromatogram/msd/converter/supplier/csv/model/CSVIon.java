@@ -7,7 +7,7 @@ package net.openchrom.chromatogram.msd.converter.supplier.csv.model;
 
 import net.openchrom.chromatogram.msd.model.core.AbstractSupplierIon;
 import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
-import net.openchrom.chromatogram.msd.model.exceptions.MZLimitExceededException;
+import net.openchrom.chromatogram.msd.model.exceptions.IonLimitExceededException;
 
 public class CSVIon extends AbstractSupplierIon implements ICSVIon {
 
@@ -19,23 +19,23 @@ public class CSVIon extends AbstractSupplierIon implements ICSVIon {
 	public static final int BINARY_ION_LENGTH_IN_BYTES = 4;
 	public static final float MIN_ABUNDANCE = 0.0f;
 	public static final float MAX_ABUNDANCE = Float.MAX_VALUE;
-	public static final float MIN_MZ = 1.0f;
-	public static final float MAX_MZ = 50000.0f;
+	public static final float MIN_Ion = 1.0f;
+	public static final float MAX_Ion = 50000.0f;
 
-	public CSVIon(float mz) throws MZLimitExceededException {
+	public CSVIon(float ion) throws IonLimitExceededException {
 
-		super(mz);
+		super(ion);
 	}
 
-	public CSVIon(float mz, boolean ignoreAbundanceLimit) throws MZLimitExceededException {
+	public CSVIon(float ion, boolean ignoreAbundanceLimit) throws IonLimitExceededException {
 
-		super(mz);
+		super(ion);
 		setIgnoreAbundanceLimit(ignoreAbundanceLimit);
 	}
 
-	public CSVIon(float mz, float abundance) throws AbundanceLimitExceededException, MZLimitExceededException {
+	public CSVIon(float ion, float abundance) throws AbundanceLimitExceededException, IonLimitExceededException {
 
-		super(mz, abundance);
+		super(ion, abundance);
 	}
 
 	@Override
@@ -45,9 +45,9 @@ public class CSVIon extends AbstractSupplierIon implements ICSVIon {
 	}
 
 	@Override
-	public float getMaxPossibleMZValue() {
+	public float getMaxPossibleIonValue() {
 
-		return MAX_MZ;
+		return MAX_Ion;
 	}
 
 	@Override
@@ -57,9 +57,9 @@ public class CSVIon extends AbstractSupplierIon implements ICSVIon {
 	}
 
 	@Override
-	public float getMinPossibleMZValue() {
+	public float getMinPossibleIonValue() {
 
-		return MIN_MZ;
+		return MIN_Ion;
 	}
 
 	// -------------------------------equals, hashCode, toString
@@ -71,11 +71,11 @@ public class CSVIon extends AbstractSupplierIon implements ICSVIon {
 		builder.append(getClass().getName());
 		builder.append("maxPossibleAbundanceValue=" + getMaxPossibleAbundanceValue());
 		builder.append(",");
-		builder.append("maxPossibleMZValue=" + getMaxPossibleMZValue());
+		builder.append("maxPossibleIonValue=" + getMaxPossibleIonValue());
 		builder.append(",");
 		builder.append("minPossibleAbundanceValue=" + getMinPossibleAbundanceValue());
 		builder.append(",");
-		builder.append("minPossibleMZValue=" + getMinPossibleMZValue());
+		builder.append("minPossibleIonValue=" + getMinPossibleIonValue());
 		builder.append("]");
 		return builder.toString();
 	}

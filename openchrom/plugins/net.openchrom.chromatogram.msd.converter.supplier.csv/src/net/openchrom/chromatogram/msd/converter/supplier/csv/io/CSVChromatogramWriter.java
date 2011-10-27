@@ -45,31 +45,31 @@ public class CSVChromatogramWriter implements ICSVChromatogramWriter {
 		 * Get the chromatographic data.
 		 */
 		IExtractedIonSignals extractedIonSignals = chromatogram.getExtractedIonSignals();
-		int startMZ = extractedIonSignals.getStartMZ();
-		int stopMZ = extractedIonSignals.getStopMZ();
-		writeHeader(csvListWriter, startMZ, stopMZ);
-		writeScans(csvListWriter, extractedIonSignals, startMZ, stopMZ);
+		int startIon = extractedIonSignals.getStartIon();
+		int stopIon = extractedIonSignals.getStopIon();
+		writeHeader(csvListWriter, startIon, stopIon);
+		writeScans(csvListWriter, extractedIonSignals, startIon, stopIon);
 		csvListWriter.close();
 	}
 
-	private void writeHeader(ICsvListWriter csvListWriter, int startMZ, int stopMZ) throws IOException {
+	private void writeHeader(ICsvListWriter csvListWriter, int startIon, int stopIon) throws IOException {
 
 		/*
 		 * Write the header.
-		 * RT(milliseconds), RT(minutes) - NOT USED BY IMPORT, RI, m/z 18, ...
+		 * RT(milliseconds), RT(minutes) - NOT USED BY IMPORT, RI, ion 18, ...
 		 */
 		List<String> headerList = new ArrayList<String>();
 		headerList.add(RT_MILLISECONDS_COLUMN);
 		headerList.add(RT_MINUTES_COLUMN);
 		headerList.add(RI_COLUMN);
-		for(Integer mz = startMZ; mz <= stopMZ; mz++) {
-			headerList.add(mz.toString());
+		for(Integer ion = startIon; ion <= stopIon; ion++) {
+			headerList.add(ion.toString());
 		}
 		String[] header = headerList.toArray(new String[]{});
 		csvListWriter.writeHeader(header);
 	}
 
-	private void writeScans(ICsvListWriter csvListWriter, IExtractedIonSignals extractedIonSignals, int startMZ, int stopMZ) throws IOException {
+	private void writeScans(ICsvListWriter csvListWriter, IExtractedIonSignals extractedIonSignals, int startIon, int stopIon) throws IOException {
 
 		/*
 		 * Write the data.
@@ -87,10 +87,10 @@ public class CSVChromatogramWriter implements ICSVChromatogramWriter {
 			scanValues.add(milliseconds / MINUTE_FACTOR);
 			scanValues.add(extractedIonSignal.getRetentionIndex());
 			/*
-			 * m/z data
+			 * ion data
 			 */
-			for(int mz = startMZ; mz <= stopMZ; mz++) {
-				scanValues.add(extractedIonSignal.getAbundance(mz));
+			for(int ion = startIon; ion <= stopIon; ion++) {
+				scanValues.add(extractedIonSignal.getAbundance(ion));
 			}
 			csvListWriter.write(scanValues);
 		}

@@ -31,7 +31,7 @@ import net.openchrom.chromatogram.msd.model.core.IChromatogramOverview;
 import net.openchrom.chromatogram.msd.model.core.IIon;
 import net.openchrom.chromatogram.msd.model.core.ISupplierMassSpectrum;
 import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
-import net.openchrom.chromatogram.msd.model.exceptions.MZLimitExceededException;
+import net.openchrom.chromatogram.msd.model.exceptions.IonLimitExceededException;
 import net.openchrom.logging.core.Logger;
 
 /**
@@ -44,7 +44,7 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 
 	private static final Logger logger = Logger.getLogger(CSVChromatogramReader.class);
 	private static final String ZERO_VALUE = "0.0";
-	private static final int MZ_COLUMN_START = 3;
+	private static final int Ion_COLUMN_START = 3;
 
 	public CSVChromatogramReader() {
 
@@ -94,7 +94,7 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 			chromatogram.setFile(file);
 		}
 		/*
-		 * Get the header inclusive m/z description.
+		 * Get the header inclusive ion description.
 		 */
 		String[] header = csvListReader.getCSVHeader(true);
 		Map<Integer, Float> ionsMap = getIonMap(header);
@@ -116,8 +116,8 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 
 		Map<Integer, Float> ions = new HashMap<Integer, Float>();
 		for(int index = 3; index < header.length; index++) {
-			float mz = Float.valueOf(header[index]);
-			ions.put(index, mz);
+			float ion = Float.valueOf(header[index]);
+			ions.put(index, ion);
 		}
 		return ions;
 	}
@@ -141,7 +141,7 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 				massSpectrum.addIon(ion);
 			} catch(AbundanceLimitExceededException e) {
 				logger.warn(e);
-			} catch(MZLimitExceededException e) {
+			} catch(IonLimitExceededException e) {
 				logger.warn(e);
 			}
 		} else {
@@ -153,34 +153,34 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		return massSpectrum;
 	}
 
-	private IIon getIonsOverview(List<String> lineEntries) throws AbundanceLimitExceededException, MZLimitExceededException {
+	private IIon getIonsOverview(List<String> lineEntries) throws AbundanceLimitExceededException, IonLimitExceededException {
 
 		float abundanceTotalSignal = 0.0f;
-		for(int index = MZ_COLUMN_START; index < lineEntries.size(); index++) {
+		for(int index = Ion_COLUMN_START; index < lineEntries.size(); index++) {
 			String abundanceValue = lineEntries.get(index);
 			if(!abundanceValue.equals(ZERO_VALUE)) {
 				float abundance = Float.valueOf(abundanceValue);
 				abundanceTotalSignal += abundance;
 			}
 		}
-		IIon ion = new CSVIon(AbstractIon.TIC_MZ, abundanceTotalSignal);
+		IIon ion = new CSVIon(AbstractIon.TIC_Ion, abundanceTotalSignal);
 		return ion;
 	}
 
 	private List<IIon> getIons(List<String> lineEntries, Map<Integer, Float> ionsMap) {
 
 		List<IIon> ions = new ArrayList<IIon>();
-		for(int index = MZ_COLUMN_START; index < lineEntries.size(); index++) {
+		for(int index = Ion_COLUMN_START; index < lineEntries.size(); index++) {
 			String abundanceValue = lineEntries.get(index);
 			if(!abundanceValue.equals(ZERO_VALUE)) {
 				float abundance = Float.valueOf(abundanceValue);
-				float mz = ionsMap.get(index);
+				float ion = ionsMap.get(index);
 				try {
-					IIon ion = new CSVIon(mz, abundance);
-					ions.add(ion);
+					IIon csvIon = new CSVIon(ion, abundance);
+					ions.add(csvIon);
 				} catch(AbundanceLimitExceededException e) {
 					logger.warn(e);
-				} catch(MZLimitExceededException e) {
+				} catch(IonLimitExceededException e) {
 					logger.warn(e);
 				}
 			}
