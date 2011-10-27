@@ -163,7 +163,7 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 				abundanceTotalSignal += abundance;
 			}
 		}
-		IIon ion = new CSVIon(AbstractIon.TIC_Ion, abundanceTotalSignal);
+		IIon ion = new CSVIon(AbstractIon.TIC_ION, abundanceTotalSignal);
 		return ion;
 	}
 
