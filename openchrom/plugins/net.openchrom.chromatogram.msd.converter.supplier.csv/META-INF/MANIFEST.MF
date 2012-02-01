@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.core.runtime,
  net.openchrom.chromatogram.msd.model;bundle-version="0.6.0",
  net.openchrom.logging;bundle-version="0.6.0",
  net.openchrom.keys;bundle-version="0.6.0",
- net.openchrom.thirdpartylibraries.supercsv;bundle-version="1.52.0"
+ net.openchrom.thirdpartylibraries.supercsv;bundle-version="1.52.0",
+ net.openchrom.processing;bundle-version="0.6.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: net.openchrom.chromatogram.msd.converter.supplier.csv.converter,
