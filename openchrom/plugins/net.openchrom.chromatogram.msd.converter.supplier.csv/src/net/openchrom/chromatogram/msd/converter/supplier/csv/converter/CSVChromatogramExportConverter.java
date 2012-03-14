@@ -40,6 +40,7 @@ public class CSVChromatogramExportConverter extends AbstractChromatogramExportCo
 		/*
 		 * Validate the file.
 		 */
+		file = SpecificationValidator.validateCSVSpecification(file);
 		IProcessingInfo processingInfoValidate = super.validate(file);
 		/*
 		 * Don't process if errors have occurred.
@@ -47,7 +48,6 @@ public class CSVChromatogramExportConverter extends AbstractChromatogramExportCo
 		if(processingInfoValidate.hasErrorMessages()) {
 			processingInfo.addMessages(processingInfoValidate);
 		} else {
-			file = SpecificationValidator.validateCSVSpecification(file);
 			ICSVChromatogramWriter writer = new CSVChromatogramWriter();
 			monitor.subTask(IConstants.EXPORT_CSV_CHROMATOGRAM);
 			try {

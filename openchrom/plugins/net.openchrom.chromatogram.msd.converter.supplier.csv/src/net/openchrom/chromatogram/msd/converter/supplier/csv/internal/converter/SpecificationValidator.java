@@ -18,6 +18,12 @@ public class SpecificationValidator {
 
 	public static File validateCSVSpecification(File file) {
 
+		if(file == null) {
+			return null;
+		}
+		/*
+		 * Validate
+		 */
 		File validFile;
 		String path = file.getAbsolutePath().toLowerCase();
 		if(file.isDirectory()) {
