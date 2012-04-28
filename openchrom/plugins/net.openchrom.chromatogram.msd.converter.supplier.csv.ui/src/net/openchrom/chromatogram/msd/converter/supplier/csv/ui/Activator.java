@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -42,7 +42,7 @@ public class Activator extends AbstractUIPlugin {
 		 * user can select the trial (if not expired) or full option.
 		 */
 		IProductPreferences productPreferences = BundleProductPreferences.getProductPreferences();
-		ProductValidator.isValidVersion(productPreferences, true);
+		ProductValidator.isValidVersion(productPreferences, true, false);
 	}
 
 	/*

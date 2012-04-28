@@ -3,16 +3,17 @@ Eclipse-RegisterBuddy: 	net.openchrom.chromatogram.msd.model, net.openchrom.thir
 Bundle-ManifestVersion: 2
 Bundle-Name: Csv
 Bundle-SymbolicName: net.openchrom.chromatogram.msd.converter.supplier.csv;singleton:=true
-Bundle-Version: 0.5.0.qualifier
+Bundle-Version: 0.6.0.qualifier
 Bundle-Activator: net.openchrom.chromatogram.msd.converter.supplier.csv.Activator
 Bundle-Vendor: http://www.openchrom.net
 Require-Bundle: org.eclipse.core.runtime,
- net.openchrom.chromatogram.msd.converter;bundle-version="0.5.0",
- net.openchrom.chromatogram.msd.model;bundle-version="0.5.0",
- net.openchrom.logging;bundle-version="0.5.0",
- net.openchrom.keys;bundle-version="0.5.0",
- net.openchrom.thirdpartylibraries.supercsv;bundle-version="1.52.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+ net.openchrom.chromatogram.msd.converter;bundle-version="0.6.0",
+ net.openchrom.chromatogram.msd.model;bundle-version="0.6.0",
+ net.openchrom.logging;bundle-version="0.6.0",
+ net.openchrom.keys;bundle-version="0.6.0",
+ net.openchrom.thirdpartylibraries.supercsv;bundle-version="1.52.0",
+ net.openchrom.processing;bundle-version="0.6.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: net.openchrom.chromatogram.msd.converter.supplier.csv.converter,
  net.openchrom.chromatogram.msd.converter.supplier.csv.preferences

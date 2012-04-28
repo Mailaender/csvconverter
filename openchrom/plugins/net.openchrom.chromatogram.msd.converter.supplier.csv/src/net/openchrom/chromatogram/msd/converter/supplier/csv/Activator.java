@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -49,6 +49,6 @@ public class Activator implements BundleActivator {
 	public static boolean isValidVersion() {
 
 		IProductPreferences productPreferences = BundleProductPreferences.getProductPreferences();
-		return ProductValidator.isValidVersion(productPreferences, false);
+		return ProductValidator.isValidVersion(productPreferences, false, false);
 	}
 }

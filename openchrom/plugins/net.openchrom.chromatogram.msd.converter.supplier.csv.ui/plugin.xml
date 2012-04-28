@@ -17,10 +17,10 @@
       </initializer>
    </extension>
    <extension
-         point="net.openchrom.chromatogram.msd.model.selectionUpdater">
-      <SelectionUpdater
+         point="net.openchrom.chromatogram.msd.model.chromatogramSelectionUpdater">
+      <ChromatogramSelectionUpdater
             updateNotifier="net.openchrom.chromatogram.msd.converter.supplier.csv.ui.notifier.SelectionUpdateNotifier">
-      </SelectionUpdater>
+      </ChromatogramSelectionUpdater>
    </extension>
 
 </plugin>

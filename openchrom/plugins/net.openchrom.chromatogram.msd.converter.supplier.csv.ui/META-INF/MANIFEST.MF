@@ -2,15 +2,15 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ui
 Bundle-SymbolicName: net.openchrom.chromatogram.msd.converter.supplier.csv.ui;singleton:=true
-Bundle-Version: 0.5.0.qualifier
+Bundle-Version: 0.6.0.qualifier
 Bundle-Activator: net.openchrom.chromatogram.msd.converter.supplier.csv.ui.Activator
 Bundle-Vendor: http://www.openchrom.net
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- net.openchrom.logging;bundle-version="0.5.0",
- net.openchrom.keys;bundle-version="0.5.0",
- net.openchrom.chromatogram.msd.converter.supplier.csv;bundle-version="0.5.0",
- net.openchrom.support.ui;bundle-version="0.5.0",
- net.openchrom.chromatogram.msd.model;bundle-version="0.5.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+ net.openchrom.logging;bundle-version="0.6.0",
+ net.openchrom.keys;bundle-version="0.6.0",
+ net.openchrom.chromatogram.msd.converter.supplier.csv;bundle-version="0.6.0",
+ net.openchrom.support.ui;bundle-version="0.6.0",
+ net.openchrom.chromatogram.msd.model;bundle-version="0.6.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

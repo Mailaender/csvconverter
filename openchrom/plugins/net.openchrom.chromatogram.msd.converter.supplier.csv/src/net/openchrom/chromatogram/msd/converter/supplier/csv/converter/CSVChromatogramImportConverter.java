@@ -1,19 +1,19 @@
 /*******************************************************************************
- * Copyright (c) 2011 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
 package net.openchrom.chromatogram.msd.converter.supplier.csv.converter;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import net.openchrom.chromatogram.msd.converter.chromatogram.AbstractChromatogramImportConverter;
-import net.openchrom.chromatogram.msd.converter.exceptions.FileIsEmptyException;
-import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotReadableException;
+import net.openchrom.chromatogram.msd.converter.processing.chromatogram.ChromatogramImportConverterProcessingInfo;
+import net.openchrom.chromatogram.msd.converter.processing.chromatogram.ChromatogramOverviewImportConverterProcessingInfo;
+import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramImportConverterProcessingInfo;
+import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramOverviewImportConverterProcessingInfo;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.Activator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.converter.SpecificationValidator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.support.IConstants;
@@ -21,42 +21,81 @@ import net.openchrom.chromatogram.msd.converter.supplier.csv.io.CSVChromatogramR
 import net.openchrom.chromatogram.msd.converter.supplier.csv.io.ICSVChromatogramReader;
 import net.openchrom.chromatogram.msd.model.core.IChromatogram;
 import net.openchrom.chromatogram.msd.model.core.IChromatogramOverview;
+import net.openchrom.logging.core.Logger;
+import net.openchrom.processing.core.IProcessingInfo;
 
 public class CSVChromatogramImportConverter extends AbstractChromatogramImportConverter {
 
-	public CSVChromatogramImportConverter() {
-
-	}
+	private static final Logger logger = Logger.getLogger(CSVChromatogramImportConverter.class);
+	private static final String DESCRIPTION = "CSV Import Converter";
 
 	@Override
-	public IChromatogram convert(File chromatogram, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
+	public IChromatogramImportConverterProcessingInfo convert(File file, IProgressMonitor monitor) {
 
-		super.validate(chromatogram);
+		IChromatogramImportConverterProcessingInfo processingInfo = new ChromatogramImportConverterProcessingInfo();
 		/*
 		 * Check the key.
 		 */
 		if(!Activator.isValidVersion()) {
-			throw new FileIsNotReadableException("The CSV Chromatogram converter has no valid licence");
+			processingInfo.addErrorMessage(DESCRIPTION, "The CSV chromatogram import converter has no valid licence.");
+			return processingInfo;
 		}
-		chromatogram = SpecificationValidator.validateCSVSpecification(chromatogram);
-		ICSVChromatogramReader reader = new CSVChromatogramReader();
-		monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM);
-		return reader.read(chromatogram, monitor);
+		/*
+		 * Validate the file.
+		 */
+		IProcessingInfo processingInfoValidate = super.validate(file);
+		if(processingInfoValidate.hasErrorMessages()) {
+			processingInfo.addMessages(processingInfoValidate);
+		} else {
+			/*
+			 * Read the chromatogram.
+			 */
+			file = SpecificationValidator.validateCSVSpecification(file);
+			ICSVChromatogramReader reader = new CSVChromatogramReader();
+			monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM);
+			try {
+				IChromatogram chromatogram = reader.read(file, monitor);
+				processingInfo.setChromatogram(chromatogram);
+			} catch(Exception e) {
+				logger.warn(e);
+				processingInfo.addErrorMessage(DESCRIPTION, "Something has definitely gone wrong with the file: " + file.getAbsolutePath());
+			}
+		}
+		return processingInfo;
 	}
 
 	@Override
-	public IChromatogramOverview convertOverview(File chromatogram, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
+	public IChromatogramOverviewImportConverterProcessingInfo convertOverview(File file, IProgressMonitor monitor) {
 
-		super.validate(chromatogram);
+		IChromatogramOverviewImportConverterProcessingInfo processingInfo = new ChromatogramOverviewImportConverterProcessingInfo();
 		/*
 		 * Check the key.
 		 */
 		if(!Activator.isValidVersion()) {
-			throw new FileIsNotReadableException("The CSV Chromatogram converter has no valid licence");
+			processingInfo.addErrorMessage(DESCRIPTION, "The CSV chromatogram overview import converter has no valid licence.");
+			return processingInfo;
 		}
-		chromatogram = SpecificationValidator.validateCSVSpecification(chromatogram);
-		ICSVChromatogramReader reader = new CSVChromatogramReader();
-		monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM_OVERVIEW);
-		return reader.readOverview(chromatogram, monitor);
+		/*
+		 * Validate the file.
+		 */
+		IProcessingInfo processingInfoValidate = super.validate(file);
+		if(processingInfoValidate.hasErrorMessages()) {
+			processingInfo.addMessages(processingInfoValidate);
+		} else {
+			/*
+			 * Read the chromatogram overview.
+			 */
+			file = SpecificationValidator.validateCSVSpecification(file);
+			ICSVChromatogramReader reader = new CSVChromatogramReader();
+			monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM_OVERVIEW);
+			try {
+				IChromatogramOverview chromatogramOverview = reader.readOverview(file, monitor);
+				processingInfo.setChromatogramOverview(chromatogramOverview);
+			} catch(Exception e) {
+				logger.warn(e);
+				processingInfo.addErrorMessage(DESCRIPTION, "Something has definitely gone wrong with the file: " + file.getAbsolutePath());
+			}
+		}
+		return processingInfo;
 	}
 }

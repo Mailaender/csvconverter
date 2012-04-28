@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -18,6 +18,12 @@ public class SpecificationValidator {
 
 	public static File validateCSVSpecification(File file) {
 
+		if(file == null) {
+			return null;
+		}
+		/*
+		 * Validate
+		 */
 		File validFile;
 		String path = file.getAbsolutePath().toLowerCase();
 		if(file.isDirectory()) {

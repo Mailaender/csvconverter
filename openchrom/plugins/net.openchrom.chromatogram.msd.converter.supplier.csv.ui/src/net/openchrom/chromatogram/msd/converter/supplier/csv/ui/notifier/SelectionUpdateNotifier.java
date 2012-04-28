@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2011 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
 package net.openchrom.chromatogram.msd.converter.supplier.csv.ui.notifier;
 
 import net.openchrom.chromatogram.msd.model.core.support.IChromatogramSelection;
-import net.openchrom.chromatogram.msd.model.notifier.ISelectionUpdateNotifier;
+import net.openchrom.chromatogram.msd.model.notifier.IChromatogramSelectionUpdateNotifier;
 
 /**
  * This class receives the update notifier event if a chromatogram has been loaded.<br/>
@@ -16,7 +16,7 @@ import net.openchrom.chromatogram.msd.model.notifier.ISelectionUpdateNotifier;
  * @author Philip (eselmeister) Wenig
  * 
  */
-public class SelectionUpdateNotifier implements ISelectionUpdateNotifier {
+public class SelectionUpdateNotifier implements IChromatogramSelectionUpdateNotifier {
 
 	@Override
 	public void update(IChromatogramSelection chromatogramSelection, boolean forceReload) {
