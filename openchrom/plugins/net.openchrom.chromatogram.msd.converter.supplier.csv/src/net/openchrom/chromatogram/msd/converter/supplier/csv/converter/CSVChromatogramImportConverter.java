@@ -10,6 +10,7 @@ import java.io.File;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import net.openchrom.chromatogram.msd.converter.chromatogram.AbstractChromatogramImportConverter;
+import net.openchrom.chromatogram.msd.converter.io.IChromatogramReader;
 import net.openchrom.chromatogram.msd.converter.processing.chromatogram.ChromatogramImportConverterProcessingInfo;
 import net.openchrom.chromatogram.msd.converter.processing.chromatogram.ChromatogramOverviewImportConverterProcessingInfo;
 import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramImportConverterProcessingInfo;
@@ -17,8 +18,7 @@ import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromat
 import net.openchrom.chromatogram.msd.converter.supplier.csv.Activator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.converter.SpecificationValidator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.support.IConstants;
-import net.openchrom.chromatogram.msd.converter.supplier.csv.io.CSVChromatogramReader;
-import net.openchrom.chromatogram.msd.converter.supplier.csv.io.ICSVChromatogramReader;
+import net.openchrom.chromatogram.msd.converter.supplier.csv.io.ChromatogramReader;
 import net.openchrom.chromatogram.msd.model.core.IChromatogram;
 import net.openchrom.chromatogram.msd.model.core.IChromatogramOverview;
 import net.openchrom.logging.core.Logger;
@@ -51,7 +51,7 @@ public class CSVChromatogramImportConverter extends AbstractChromatogramImportCo
 			 * Read the chromatogram.
 			 */
 			file = SpecificationValidator.validateCSVSpecification(file);
-			ICSVChromatogramReader reader = new CSVChromatogramReader();
+			IChromatogramReader reader = new ChromatogramReader();
 			monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM);
 			try {
 				IChromatogram chromatogram = reader.read(file, monitor);
@@ -86,7 +86,7 @@ public class CSVChromatogramImportConverter extends AbstractChromatogramImportCo
 			 * Read the chromatogram overview.
 			 */
 			file = SpecificationValidator.validateCSVSpecification(file);
-			ICSVChromatogramReader reader = new CSVChromatogramReader();
+			IChromatogramReader reader = new ChromatogramReader();
 			monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM_OVERVIEW);
 			try {
 				IChromatogramOverview chromatogramOverview = reader.readOverview(file, monitor);

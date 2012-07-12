@@ -10,13 +10,13 @@ import java.io.File;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import net.openchrom.chromatogram.msd.converter.chromatogram.AbstractChromatogramExportConverter;
+import net.openchrom.chromatogram.msd.converter.io.IChromatogramWriter;
 import net.openchrom.chromatogram.msd.converter.processing.chromatogram.ChromatogramExportConverterProcessingInfo;
 import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramExportConverterProcessingInfo;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.Activator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.converter.SpecificationValidator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.support.IConstants;
-import net.openchrom.chromatogram.msd.converter.supplier.csv.io.CSVChromatogramWriter;
-import net.openchrom.chromatogram.msd.converter.supplier.csv.io.ICSVChromatogramWriter;
+import net.openchrom.chromatogram.msd.converter.supplier.csv.io.ChromatogramWriter;
 import net.openchrom.chromatogram.msd.model.core.IChromatogram;
 import net.openchrom.logging.core.Logger;
 import net.openchrom.processing.core.IProcessingInfo;
@@ -48,7 +48,7 @@ public class CSVChromatogramExportConverter extends AbstractChromatogramExportCo
 		if(processingInfoValidate.hasErrorMessages()) {
 			processingInfo.addMessages(processingInfoValidate);
 		} else {
-			ICSVChromatogramWriter writer = new CSVChromatogramWriter();
+			IChromatogramWriter writer = new ChromatogramWriter();
 			monitor.subTask(IConstants.EXPORT_CSV_CHROMATOGRAM);
 			try {
 				writer.writeChromatogram(file, chromatogram, monitor);

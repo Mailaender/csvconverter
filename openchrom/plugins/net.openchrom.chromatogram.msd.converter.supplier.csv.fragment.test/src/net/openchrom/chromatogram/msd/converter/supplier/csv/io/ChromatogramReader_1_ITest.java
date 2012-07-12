@@ -7,7 +7,7 @@ package net.openchrom.chromatogram.msd.converter.supplier.csv.io;
 
 import net.openchrom.chromatogram.msd.converter.supplier.csv.TestPathHelper;
 
-public class CSVChromatogramReader_1_ITest extends ChromatogramWriterTestCase {
+public class ChromatogramReader_1_ITest extends ChromatogramWriterTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
