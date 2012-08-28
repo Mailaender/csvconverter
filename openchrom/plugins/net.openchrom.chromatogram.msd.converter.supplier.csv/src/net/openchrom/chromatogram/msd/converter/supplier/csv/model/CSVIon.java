@@ -19,21 +19,21 @@ public class CSVIon extends AbstractSupplierIon implements ICSVIon {
 	public static final int BINARY_ION_LENGTH_IN_BYTES = 4;
 	public static final float MIN_ABUNDANCE = 0.0f;
 	public static final float MAX_ABUNDANCE = Float.MAX_VALUE;
-	public static final float MIN_Ion = 1.0f;
-	public static final float MAX_Ion = 50000.0f;
+	public static final double MIN_ION = 1.0d;
+	public static final double MAX_ION = 50000.0d;
 
-	public CSVIon(float ion) throws IonLimitExceededException {
+	public CSVIon(double ion) throws IonLimitExceededException {
 
 		super(ion);
 	}
 
-	public CSVIon(float ion, boolean ignoreAbundanceLimit) throws IonLimitExceededException {
+	public CSVIon(double ion, boolean ignoreAbundanceLimit) throws IonLimitExceededException {
 
 		super(ion);
 		setIgnoreAbundanceLimit(ignoreAbundanceLimit);
 	}
 
-	public CSVIon(float ion, float abundance) throws AbundanceLimitExceededException, IonLimitExceededException {
+	public CSVIon(double ion, float abundance) throws AbundanceLimitExceededException, IonLimitExceededException {
 
 		super(ion, abundance);
 	}
@@ -45,9 +45,9 @@ public class CSVIon extends AbstractSupplierIon implements ICSVIon {
 	}
 
 	@Override
-	public float getMaxPossibleIonValue() {
+	public double getMaxPossibleIonValue() {
 
-		return MAX_Ion;
+		return MAX_ION;
 	}
 
 	@Override
@@ -57,9 +57,9 @@ public class CSVIon extends AbstractSupplierIon implements ICSVIon {
 	}
 
 	@Override
-	public float getMinPossibleIonValue() {
+	public double getMinPossibleIonValue() {
 
-		return MIN_Ion;
+		return MIN_ION;
 	}
 
 	// -------------------------------equals, hashCode, toString
