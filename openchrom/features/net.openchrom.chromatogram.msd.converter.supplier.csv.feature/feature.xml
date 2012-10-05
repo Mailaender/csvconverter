@@ -41,6 +41,10 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <discovery label="CSV Chromatogram Converter" url="http://www.openchrom.net/plugins/converter/csv/"/>
    </url>
 
+   <requires>
+      <import feature="net.openchrom.keys.feature" version="0.7.0.qualifier"/>
+   </requires>
+
    <plugin
          id="net.openchrom.chromatogram.msd.converter.supplier.csv"
          download-size="0"
