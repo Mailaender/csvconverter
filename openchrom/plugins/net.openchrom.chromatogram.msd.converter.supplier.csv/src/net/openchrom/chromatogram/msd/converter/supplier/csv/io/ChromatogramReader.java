@@ -21,6 +21,7 @@ import org.supercsv.prefs.CsvPreference;
 
 import net.openchrom.chromatogram.msd.converter.exceptions.FileIsEmptyException;
 import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotReadableException;
+import net.openchrom.chromatogram.msd.converter.io.IChromatogramReader;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.preferences.BundleProductPreferences;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVChromatogram;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVIon;
@@ -40,13 +41,13 @@ import net.openchrom.logging.core.Logger;
  * 
  * @author eselmeister
  */
-public class CSVChromatogramReader implements ICSVChromatogramReader {
+public class ChromatogramReader implements IChromatogramReader {
 
-	private static final Logger logger = Logger.getLogger(CSVChromatogramReader.class);
+	private static final Logger logger = Logger.getLogger(ChromatogramReader.class);
 	private static final String ZERO_VALUE = "0.0";
 	private static final int Ion_COLUMN_START = 3;
 
-	public CSVChromatogramReader() {
+	public ChromatogramReader() {
 
 	}
 
@@ -78,7 +79,7 @@ public class CSVChromatogramReader implements ICSVChromatogramReader {
 		 */
 		String firstColumn = header[0];
 		csvListReader.close();
-		return firstColumn.equals(CSVChromatogramWriter.RT_MILLISECONDS_COLUMN);
+		return firstColumn.equals(ChromatogramWriter.RT_MILLISECONDS_COLUMN);
 	}
 
 	private IChromatogram readChromatogram(File file, boolean overview) throws IOException {

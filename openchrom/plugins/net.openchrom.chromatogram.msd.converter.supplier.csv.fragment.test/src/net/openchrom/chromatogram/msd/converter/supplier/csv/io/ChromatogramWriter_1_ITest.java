@@ -12,17 +12,18 @@ import java.io.IOException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 
 import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotWriteableException;
+import net.openchrom.chromatogram.msd.converter.io.IChromatogramWriter;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.TestPathHelper;
 
-public class CSVChromatogramWriter_1_ITest extends ChromatogramReaderTestCase {
+public class ChromatogramWriter_1_ITest extends ChromatogramReaderTestCase {
 
-	private ICSVChromatogramWriter chromatogramWriter;
+	private IChromatogramWriter chromatogramWriter;
 
 	@Override
 	protected void setUp() throws Exception {
 
 		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_OP17760);
-		chromatogramWriter = new CSVChromatogramWriter();
+		chromatogramWriter = new ChromatogramWriter();
 		super.setUp();
 	}
 

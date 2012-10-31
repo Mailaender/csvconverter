@@ -18,18 +18,19 @@ import org.supercsv.io.ICsvListWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotWriteableException;
+import net.openchrom.chromatogram.msd.converter.io.IChromatogramWriter;
 import net.openchrom.chromatogram.msd.model.core.IChromatogram;
 import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignal;
 import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignals;
 
-public class CSVChromatogramWriter implements ICSVChromatogramWriter {
+public class ChromatogramWriter implements IChromatogramWriter {
 
 	public static final String RT_MILLISECONDS_COLUMN = "RT(milliseconds)";
 	public static final String RT_MINUTES_COLUMN = "RT(minutes) - NOT USED BY IMPORT";
 	public static final String RI_COLUMN = "RI";
 	private static final float MINUTE_FACTOR = 1000.0f * 60; // auslagern
 
-	public CSVChromatogramWriter() {
+	public ChromatogramWriter() {
 
 	}
 
