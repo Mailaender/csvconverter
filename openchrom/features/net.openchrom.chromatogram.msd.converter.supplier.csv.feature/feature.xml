@@ -53,26 +53,10 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          unpack="false"/>
 
    <plugin
-         id="net.openchrom.chromatogram.msd.converter.supplier.csv.fragment.i18n"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
-   <plugin
          id="net.openchrom.chromatogram.msd.converter.supplier.csv.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="net.openchrom.chromatogram.msd.converter.supplier.csv.ui.fragment.i18n"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
          unpack="false"/>
 
 </feature>
