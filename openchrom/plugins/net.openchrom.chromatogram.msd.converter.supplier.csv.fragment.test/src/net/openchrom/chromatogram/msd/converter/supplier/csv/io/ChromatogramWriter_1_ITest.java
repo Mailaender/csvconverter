@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 
-import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotWriteableException;
+import net.openchrom.chromatogram.converter.exceptions.FileIsNotWriteableException;
 import net.openchrom.chromatogram.msd.converter.io.IChromatogramWriter;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.TestPathHelper;
 
