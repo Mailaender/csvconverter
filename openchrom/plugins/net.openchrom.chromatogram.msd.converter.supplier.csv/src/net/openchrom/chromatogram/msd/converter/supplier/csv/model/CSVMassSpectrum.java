@@ -5,13 +5,13 @@
  *******************************************************************************/
 package net.openchrom.chromatogram.msd.converter.supplier.csv.model;
 
-import net.openchrom.chromatogram.msd.model.core.AbstractSupplierMassSpectrum;
+import net.openchrom.chromatogram.msd.model.core.AbstractSupplierScanMassSpectrum;
 import net.openchrom.chromatogram.msd.model.core.IIon;
 import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
 import net.openchrom.chromatogram.msd.model.exceptions.IonLimitExceededException;
 import net.openchrom.logging.core.Logger;
 
-public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICSVMassSpectrum {
+public class CSVMassSpectrum extends AbstractSupplierScanMassSpectrum implements ICSVMassSpectrum {
 
 	/**
 	 * Renew the serialVersionUID any time you have changed some fields or

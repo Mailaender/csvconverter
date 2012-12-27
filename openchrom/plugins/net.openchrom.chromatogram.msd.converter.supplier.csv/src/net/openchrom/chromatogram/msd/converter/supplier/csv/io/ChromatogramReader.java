@@ -30,7 +30,7 @@ import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVMassSpectr
 import net.openchrom.chromatogram.msd.model.core.AbstractIon;
 import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
 import net.openchrom.chromatogram.msd.model.core.IIon;
-import net.openchrom.chromatogram.msd.model.core.ISupplierMassSpectrum;
+import net.openchrom.chromatogram.msd.model.core.ISupplierScanMassSpectrum;
 import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
 import net.openchrom.chromatogram.msd.model.exceptions.IonLimitExceededException;
 import net.openchrom.logging.core.Logger;
@@ -101,7 +101,7 @@ public class ChromatogramReader implements IChromatogramReader {
 		Map<Integer, Float> ionsMap = getIonMap(header);
 		List<String> lineEntries;
 		while((lineEntries = csvListReader.read()) != null) {
-			ISupplierMassSpectrum supplierMassSpectrum = getScan(lineEntries, ionsMap, overview);
+			ISupplierScanMassSpectrum supplierMassSpectrum = getScan(lineEntries, ionsMap, overview);
 			/*
 			 * TODO setParentMassSpectrum automatisch beim Hinzufügen?
 			 */
@@ -123,9 +123,9 @@ public class ChromatogramReader implements IChromatogramReader {
 		return ions;
 	}
 
-	private ISupplierMassSpectrum getScan(List<String> lineEntries, Map<Integer, Float> ionsMap, boolean overview) {
+	private ISupplierScanMassSpectrum getScan(List<String> lineEntries, Map<Integer, Float> ionsMap, boolean overview) {
 
-		ISupplierMassSpectrum massSpectrum = new CSVMassSpectrum();
+		ISupplierScanMassSpectrum massSpectrum = new CSVMassSpectrum();
 		String retentionTimeInMilliseconds = lineEntries.get(0);
 		int retentionTime = Integer.valueOf(retentionTimeInMilliseconds);
 		massSpectrum.setRetentionTime(retentionTime);

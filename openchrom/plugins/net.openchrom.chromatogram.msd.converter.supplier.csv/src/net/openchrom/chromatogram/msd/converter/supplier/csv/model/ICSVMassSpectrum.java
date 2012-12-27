@@ -5,7 +5,7 @@
  *******************************************************************************/
 package net.openchrom.chromatogram.msd.converter.supplier.csv.model;
 
-import net.openchrom.chromatogram.msd.model.core.ISupplierMassSpectrum;
+import net.openchrom.chromatogram.msd.model.core.ISupplierScanMassSpectrum;
 
-public interface ICSVMassSpectrum extends ISupplierMassSpectrum {
+public interface ICSVMassSpectrum extends ISupplierScanMassSpectrum {
 }
