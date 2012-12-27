@@ -20,7 +20,7 @@ import net.openchrom.chromatogram.msd.converter.supplier.csv.Activator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.converter.SpecificationValidator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.support.IConstants;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.io.ChromatogramReader;
-import net.openchrom.chromatogram.msd.model.core.IChromatogram;
+import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
 import net.openchrom.logging.core.Logger;
 import net.openchrom.processing.core.IProcessingInfo;
 
@@ -54,7 +54,7 @@ public class CSVChromatogramImportConverter extends AbstractChromatogramImportCo
 			IChromatogramReader reader = new ChromatogramReader();
 			monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM);
 			try {
-				IChromatogram chromatogram = reader.read(file, monitor);
+				IChromatogramMSD chromatogram = reader.read(file, monitor);
 				processingInfo.setChromatogram(chromatogram);
 			} catch(Exception e) {
 				logger.warn(e);

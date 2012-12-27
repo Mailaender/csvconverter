@@ -19,7 +19,7 @@ import org.supercsv.prefs.CsvPreference;
 
 import net.openchrom.chromatogram.converter.exceptions.FileIsNotWriteableException;
 import net.openchrom.chromatogram.msd.converter.io.IChromatogramWriter;
-import net.openchrom.chromatogram.msd.model.core.IChromatogram;
+import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
 import net.openchrom.chromatogram.msd.model.exceptions.ChromatogramIsNullException;
 import net.openchrom.chromatogram.msd.model.xic.ExtractedIonSignalExtractor;
 import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignal;
@@ -37,7 +37,7 @@ public class ChromatogramWriter implements IChromatogramWriter {
 	}
 
 	@Override
-	public void writeChromatogram(File file, IChromatogram chromatogram, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotWriteableException, IOException {
+	public void writeChromatogram(File file, IChromatogramMSD chromatogram, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotWriteableException, IOException {
 
 		/*
 		 * Create the list writer.
@@ -93,7 +93,7 @@ public class ChromatogramWriter implements IChromatogramWriter {
 			 */
 			int milliseconds = extractedIonSignal.getRetentionTime();
 			scanValues.add(milliseconds);
-			scanValues.add(milliseconds / IChromatogram.MINUTE_CORRELATION_FACTOR);
+			scanValues.add(milliseconds / IChromatogramMSD.MINUTE_CORRELATION_FACTOR);
 			scanValues.add(extractedIonSignal.getRetentionIndex());
 			/*
 			 * ion data

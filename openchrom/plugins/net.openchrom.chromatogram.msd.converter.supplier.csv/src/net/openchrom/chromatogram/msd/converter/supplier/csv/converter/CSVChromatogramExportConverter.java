@@ -17,7 +17,7 @@ import net.openchrom.chromatogram.msd.converter.supplier.csv.Activator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.converter.SpecificationValidator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.support.IConstants;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.io.ChromatogramWriter;
-import net.openchrom.chromatogram.msd.model.core.IChromatogram;
+import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
 import net.openchrom.logging.core.Logger;
 import net.openchrom.processing.core.IProcessingInfo;
 
@@ -27,7 +27,7 @@ public class CSVChromatogramExportConverter extends AbstractChromatogramExportCo
 	private static final String DESCRIPTION = "CSV Export Converter";
 
 	@Override
-	public IChromatogramExportConverterProcessingInfo convert(File file, IChromatogram chromatogram, IProgressMonitor monitor) {
+	public IChromatogramExportConverterProcessingInfo convert(File file, IChromatogramMSD chromatogram, IProgressMonitor monitor) {
 
 		IChromatogramExportConverterProcessingInfo processingInfo = new ChromatogramExportConverterProcessingInfo();
 		/*

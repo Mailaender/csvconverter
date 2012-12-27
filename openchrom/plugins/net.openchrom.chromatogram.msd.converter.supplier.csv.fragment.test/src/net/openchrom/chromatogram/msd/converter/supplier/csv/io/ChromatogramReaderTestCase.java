@@ -11,7 +11,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 
 import net.openchrom.chromatogram.msd.converter.chromatogram.ChromatogramConverter;
 import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramImportConverterProcessingInfo;
-import net.openchrom.chromatogram.msd.model.core.IChromatogram;
+import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
 import junit.framework.TestCase;
 
 /**
@@ -21,7 +21,7 @@ import junit.framework.TestCase;
  */
 public class ChromatogramReaderTestCase extends TestCase {
 
-	protected IChromatogram chromatogram;
+	protected IChromatogramMSD chromatogram;
 	protected String pathImport;
 	protected File fileImport;
 	private final static String EXTENSION_POINT_ID = "net.openchrom.chromatogram.msd.converter.supplier.agilent";

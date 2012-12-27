@@ -28,7 +28,7 @@ import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVChromatogr
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVIon;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVMassSpectrum;
 import net.openchrom.chromatogram.msd.model.core.AbstractIon;
-import net.openchrom.chromatogram.msd.model.core.IChromatogram;
+import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
 import net.openchrom.chromatogram.msd.model.core.IIon;
 import net.openchrom.chromatogram.msd.model.core.ISupplierMassSpectrum;
 import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
@@ -52,7 +52,7 @@ public class ChromatogramReader implements IChromatogramReader {
 	}
 
 	@Override
-	public IChromatogram read(File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
+	public IChromatogramMSD read(File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
 
 		if(isValidFileFormat(file)) {
 			return readChromatogram(file, false);
@@ -82,11 +82,11 @@ public class ChromatogramReader implements IChromatogramReader {
 		return firstColumn.equals(ChromatogramWriter.RT_MILLISECONDS_COLUMN);
 	}
 
-	private IChromatogram readChromatogram(File file, boolean overview) throws IOException {
+	private IChromatogramMSD readChromatogram(File file, boolean overview) throws IOException {
 
 		FileReader reader = new FileReader(file);
 		ICsvListReader csvListReader = new CsvListReader(reader, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
-		IChromatogram chromatogram = new CSVChromatogram();
+		IChromatogramMSD chromatogram = new CSVChromatogram();
 		if(!overview) {
 			/*
 			 * If the chromatogram shall be exportable, set the id otherwise it is null or "".
