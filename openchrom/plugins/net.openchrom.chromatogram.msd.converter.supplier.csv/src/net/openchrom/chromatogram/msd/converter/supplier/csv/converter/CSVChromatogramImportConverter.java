@@ -9,13 +9,13 @@ import java.io.File;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
+import net.openchrom.chromatogram.converter.processing.chromatogram.ChromatogramOverviewImportConverterProcessingInfo;
+import net.openchrom.chromatogram.converter.processing.chromatogram.IChromatogramOverviewImportConverterProcessingInfo;
 import net.openchrom.chromatogram.model.core.IChromatogramOverview;
-import net.openchrom.chromatogram.msd.converter.chromatogram.AbstractChromatogramImportConverter;
-import net.openchrom.chromatogram.msd.converter.io.IChromatogramReader;
-import net.openchrom.chromatogram.msd.converter.processing.chromatogram.ChromatogramImportConverterProcessingInfo;
-import net.openchrom.chromatogram.msd.converter.processing.chromatogram.ChromatogramOverviewImportConverterProcessingInfo;
-import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramImportConverterProcessingInfo;
-import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramOverviewImportConverterProcessingInfo;
+import net.openchrom.chromatogram.msd.converter.chromatogram.AbstractChromatogramMSDImportConverter;
+import net.openchrom.chromatogram.msd.converter.io.IChromatogramMSDReader;
+import net.openchrom.chromatogram.msd.converter.processing.chromatogram.ChromatogramMSDImportConverterProcessingInfo;
+import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.Activator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.converter.SpecificationValidator;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.internal.support.IConstants;
@@ -24,15 +24,15 @@ import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
 import net.openchrom.logging.core.Logger;
 import net.openchrom.processing.core.IProcessingInfo;
 
-public class CSVChromatogramImportConverter extends AbstractChromatogramImportConverter {
+public class CSVChromatogramImportConverter extends AbstractChromatogramMSDImportConverter {
 
 	private static final Logger logger = Logger.getLogger(CSVChromatogramImportConverter.class);
 	private static final String DESCRIPTION = "CSV Import Converter";
 
 	@Override
-	public IChromatogramImportConverterProcessingInfo convert(File file, IProgressMonitor monitor) {
+	public IChromatogramMSDImportConverterProcessingInfo convert(File file, IProgressMonitor monitor) {
 
-		IChromatogramImportConverterProcessingInfo processingInfo = new ChromatogramImportConverterProcessingInfo();
+		IChromatogramMSDImportConverterProcessingInfo processingInfo = new ChromatogramMSDImportConverterProcessingInfo();
 		/*
 		 * Check the key.
 		 */
@@ -51,7 +51,7 @@ public class CSVChromatogramImportConverter extends AbstractChromatogramImportCo
 			 * Read the chromatogram.
 			 */
 			file = SpecificationValidator.validateCSVSpecification(file);
-			IChromatogramReader reader = new ChromatogramReader();
+			IChromatogramMSDReader reader = new ChromatogramReader();
 			monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM);
 			try {
 				IChromatogramMSD chromatogram = reader.read(file, monitor);
@@ -86,7 +86,7 @@ public class CSVChromatogramImportConverter extends AbstractChromatogramImportCo
 			 * Read the chromatogram overview.
 			 */
 			file = SpecificationValidator.validateCSVSpecification(file);
-			IChromatogramReader reader = new ChromatogramReader();
+			IChromatogramMSDReader reader = new ChromatogramReader();
 			monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM_OVERVIEW);
 			try {
 				IChromatogramOverview chromatogramOverview = reader.readOverview(file, monitor);

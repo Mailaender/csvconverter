@@ -22,7 +22,7 @@ import org.supercsv.prefs.CsvPreference;
 import net.openchrom.chromatogram.converter.exceptions.FileIsEmptyException;
 import net.openchrom.chromatogram.converter.exceptions.FileIsNotReadableException;
 import net.openchrom.chromatogram.model.core.IChromatogramOverview;
-import net.openchrom.chromatogram.msd.converter.io.IChromatogramReader;
+import net.openchrom.chromatogram.msd.converter.io.IChromatogramMSDReader;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.preferences.BundleProductPreferences;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVChromatogram;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVIon;
@@ -41,7 +41,7 @@ import net.openchrom.logging.core.Logger;
  * 
  * @author eselmeister
  */
-public class ChromatogramReader implements IChromatogramReader {
+public class ChromatogramReader implements IChromatogramMSDReader {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramReader.class);
 	private static final String ZERO_VALUE = "0.0";

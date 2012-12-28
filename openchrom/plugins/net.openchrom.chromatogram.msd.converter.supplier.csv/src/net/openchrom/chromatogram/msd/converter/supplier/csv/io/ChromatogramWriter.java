@@ -18,7 +18,7 @@ import org.supercsv.io.ICsvListWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import net.openchrom.chromatogram.converter.exceptions.FileIsNotWriteableException;
-import net.openchrom.chromatogram.msd.converter.io.IChromatogramWriter;
+import net.openchrom.chromatogram.msd.converter.io.IChromatogramMSDWriter;
 import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
 import net.openchrom.chromatogram.msd.model.exceptions.ChromatogramIsNullException;
 import net.openchrom.chromatogram.msd.model.xic.ExtractedIonSignalExtractor;
@@ -26,7 +26,7 @@ import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignal;
 import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignalExtractor;
 import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignals;
 
-public class ChromatogramWriter implements IChromatogramWriter {
+public class ChromatogramWriter implements IChromatogramMSDWriter {
 
 	public static final String RT_MILLISECONDS_COLUMN = "RT(milliseconds)";
 	public static final String RT_MINUTES_COLUMN = "RT(minutes) - NOT USED BY IMPORT";
