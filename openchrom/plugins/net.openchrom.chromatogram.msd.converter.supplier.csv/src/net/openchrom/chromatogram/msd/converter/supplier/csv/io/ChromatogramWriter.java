@@ -18,9 +18,9 @@ import org.supercsv.io.ICsvListWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import net.openchrom.chromatogram.converter.exceptions.FileIsNotWriteableException;
+import net.openchrom.chromatogram.model.exceptions.ChromatogramIsNullException;
 import net.openchrom.chromatogram.msd.converter.io.IChromatogramMSDWriter;
 import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
-import net.openchrom.chromatogram.msd.model.exceptions.ChromatogramIsNullException;
 import net.openchrom.chromatogram.msd.model.xic.ExtractedIonSignalExtractor;
 import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignal;
 import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignalExtractor;
