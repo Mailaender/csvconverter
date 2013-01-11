@@ -3,7 +3,7 @@
    <description name="CSV Chromatogram Converter" url="http://www.openchrom.net/plugins/converter/csv/update">
       This is a CSV chromatogram converter.
    </description>
-   <feature url="features/net.openchrom.chromatogram.msd.converter.supplier.csv.feature_0.7.0.qualifier.jar" id="net.openchrom.chromatogram.msd.converter.supplier.csv.feature" version="0.7.0.qualifier">
+   <feature url="features/net.openchrom.chromatogram.msd.converter.supplier.csv.feature_0.8.0.qualifier.jar" id="net.openchrom.chromatogram.msd.converter.supplier.csv.feature" version="0.8.0.qualifier">
       <category name="net.openchrom.chromatogram.msd.plugins.converter"/>
    </feature>
    <category-def name="net.openchrom.chromatogram.msd.plugins.converter" label="Chromatogram Converter"/>

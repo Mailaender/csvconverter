@@ -9,3 +9,7 @@ openchrom/sites/net.openchrom.chromatogram.msd.converter.supplier.csv.updateSite
 openchrom/sites/net.openchrom.chromatogram.msd.converter.supplier.csv.updateSite/features/
 openchrom/sites/net.openchrom.chromatogram.msd.converter.supplier.csv.updateSite/plugins/
 openchrom/plugins/net.openchrom.chromatogram.msd.converter.supplier.csv.fragment.test/testData/files/export/Test.csv
+openchrom/features/net.openchrom.chromatogram.msd.converter.supplier.csv.feature/target/
+openchrom/plugins/net.openchrom.chromatogram.msd.converter.supplier.csv.ui/target/
+openchrom/plugins/net.openchrom.chromatogram.msd.converter.supplier.csv/target/
+openchrom/sites/net.openchrom.chromatogram.msd.converter.supplier.csv.updateSite/target/
