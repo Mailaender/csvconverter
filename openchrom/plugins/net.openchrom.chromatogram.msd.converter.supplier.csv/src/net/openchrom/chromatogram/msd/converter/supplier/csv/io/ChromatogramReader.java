@@ -23,6 +23,7 @@ import net.openchrom.chromatogram.converter.exceptions.FileIsEmptyException;
 import net.openchrom.chromatogram.converter.exceptions.FileIsNotReadableException;
 import net.openchrom.chromatogram.model.core.IChromatogramOverview;
 import net.openchrom.chromatogram.model.exceptions.AbundanceLimitExceededException;
+import net.openchrom.chromatogram.msd.converter.io.AbstractChromatogramMSDReader;
 import net.openchrom.chromatogram.msd.converter.io.IChromatogramMSDReader;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.preferences.BundleProductPreferences;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVChromatogram;
@@ -41,7 +42,7 @@ import net.openchrom.logging.core.Logger;
  * 
  * @author eselmeister
  */
-public class ChromatogramReader implements IChromatogramMSDReader {
+public class ChromatogramReader extends AbstractChromatogramMSDReader implements IChromatogramMSDReader {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramReader.class);
 	private static final String ZERO_VALUE = "0.0";
