@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import net.openchrom.chromatogram.msd.converter.chromatogram.ChromatogramConverterMSD;
 import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
 import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
+
 import junit.framework.TestCase;
 
 /**
@@ -41,6 +42,9 @@ public class ChromatogramReaderTestCase extends TestCase {
 		pathImport = null;
 		fileImport = null;
 		chromatogram = null;
+		//
+		System.gc();
+		//
 		super.tearDown();
 	}
 }
