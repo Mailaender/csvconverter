@@ -19,7 +19,7 @@ public class TestPathHelper extends PathResolver {
 	 * IMPORT
 	 */
 	public static final String TESTFILE_IMPORT_TEST = "testData/files/import/Test.csv";
-	public static final String TESTFILE_IMPORT_OP17760 = "testData/files/import/OP17760.D/DATA.MS";
+	public static final String TESTFILE_IMPORT_CHROMATOGRAM_1 = "testData/files/import/Chromatogram1.ocb";
 	/*
 	 * EXPORT
 	 */
