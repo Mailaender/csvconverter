@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2013 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -11,25 +11,25 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 
-import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotWriteableException;
-import net.openchrom.chromatogram.msd.converter.io.IChromatogramWriter;
+import net.openchrom.chromatogram.converter.exceptions.FileIsNotWriteableException;
+import net.openchrom.chromatogram.msd.converter.io.IChromatogramMSDWriter;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.TestPathHelper;
 
 public class ChromatogramWriter_1_ITest extends ChromatogramReaderTestCase {
 
-	private IChromatogramWriter chromatogramWriter;
+	private IChromatogramMSDWriter chromatogramWriter;
 
 	@Override
 	protected void setUp() throws Exception {
 
-		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_OP17760);
+		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
 		chromatogramWriter = new ChromatogramWriter();
 		super.setUp();
 	}
 
 	public void testExport_1() {
 
-		File file = new File("/home/wenigmedia/Desktop/Test/OP17760.csv");
+		File file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_EXPORT_TEST));
 		try {
 			chromatogramWriter.writeChromatogram(file, chromatogram, new NullProgressMonitor());
 			assertTrue(true);

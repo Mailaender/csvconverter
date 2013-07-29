@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2013 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
 package net.openchrom.chromatogram.msd.converter.supplier.csv.model;
 
+import net.openchrom.chromatogram.model.exceptions.AbundanceLimitExceededException;
 import net.openchrom.chromatogram.msd.model.core.AbstractSupplierIon;
-import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
 import net.openchrom.chromatogram.msd.model.exceptions.IonLimitExceededException;
 
 public class CSVIon extends AbstractSupplierIon implements ICSVIon {

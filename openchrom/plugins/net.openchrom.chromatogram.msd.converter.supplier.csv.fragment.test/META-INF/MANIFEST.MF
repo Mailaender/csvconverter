@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Test
 Bundle-SymbolicName: net.openchrom.chromatogram.msd.converter.supplier.csv.fragment.test
-Bundle-Version: 0.7.0.qualifier
-Bundle-Vendor: http://www.openchrom.net
-Fragment-Host: net.openchrom.chromatogram.msd.converter.supplier.csv;bundle-version="0.7.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Version: 0.8.0.qualifier
+Bundle-Vendor: OpenChrom
+Fragment-Host: net.openchrom.chromatogram.msd.converter.supplier.csv;bundle-version="0.8.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: net.openchrom.thirdpartylibraries.junitaddons;bundle-version="1.4.0",
  net.openchrom.thirdpartylibraries.junitperf;bundle-version="1.9.1",
  org.junit;bundle-version="4.8.1"

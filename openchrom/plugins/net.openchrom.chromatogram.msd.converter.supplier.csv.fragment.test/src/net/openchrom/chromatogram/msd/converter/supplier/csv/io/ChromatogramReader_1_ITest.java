@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2013 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -15,8 +15,8 @@ public class ChromatogramReader_1_ITest extends ChromatogramWriterTestCase {
 		/*
 		 * Import
 		 */
-		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_OP17760);
-		extensionPointImport = "net.openchrom.chromatogram.msd.converter.supplier.agilent";
+		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
+		extensionPointImport = "net.openchrom.chromatogram.msd.converter.supplier.openchrom";
 		/*
 		 * Export/Reimport
 		 */

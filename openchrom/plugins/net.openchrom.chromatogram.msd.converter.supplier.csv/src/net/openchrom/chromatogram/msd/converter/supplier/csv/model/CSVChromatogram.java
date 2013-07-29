@@ -1,13 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2013 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
 package net.openchrom.chromatogram.msd.converter.supplier.csv.model;
 
-import net.openchrom.chromatogram.msd.model.core.AbstractChromatogram;
+import net.openchrom.chromatogram.msd.model.core.AbstractChromatogramMSD;
 
-public class CSVChromatogram extends AbstractChromatogram implements ICSVChromatogram {
+public class CSVChromatogram extends AbstractChromatogramMSD implements ICSVChromatogram {
 
 	@Override
 	public String getName() {

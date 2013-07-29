@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2013 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -9,9 +9,10 @@ import java.io.File;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 
-import net.openchrom.chromatogram.msd.converter.chromatogram.ChromatogramConverter;
-import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramImportConverterProcessingInfo;
-import net.openchrom.chromatogram.msd.model.core.IChromatogram;
+import net.openchrom.chromatogram.msd.converter.chromatogram.ChromatogramConverterMSD;
+import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
+import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
+
 import junit.framework.TestCase;
 
 /**
@@ -21,7 +22,7 @@ import junit.framework.TestCase;
  */
 public class ChromatogramReaderTestCase extends TestCase {
 
-	protected IChromatogram chromatogram;
+	protected IChromatogramMSD chromatogram;
 	protected String pathImport;
 	protected File fileImport;
 	private final static String EXTENSION_POINT_ID = "net.openchrom.chromatogram.msd.converter.supplier.agilent";
@@ -31,7 +32,7 @@ public class ChromatogramReaderTestCase extends TestCase {
 
 		super.setUp();
 		fileImport = new File(this.pathImport);
-		IChromatogramImportConverterProcessingInfo processingInfo = ChromatogramConverter.convert(fileImport, EXTENSION_POINT_ID, new NullProgressMonitor());
+		IChromatogramMSDImportConverterProcessingInfo processingInfo = ChromatogramConverterMSD.convert(fileImport, EXTENSION_POINT_ID, new NullProgressMonitor());
 		chromatogram = processingInfo.getChromatogram();
 	}
 
@@ -41,6 +42,9 @@ public class ChromatogramReaderTestCase extends TestCase {
 		pathImport = null;
 		fileImport = null;
 		chromatogram = null;
+		//
+		System.gc();
+		//
 		super.tearDown();
 	}
 }

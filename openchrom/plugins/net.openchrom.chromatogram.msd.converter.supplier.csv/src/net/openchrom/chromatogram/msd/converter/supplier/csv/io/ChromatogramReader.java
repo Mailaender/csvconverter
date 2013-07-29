@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2012 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2013 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -19,19 +19,20 @@ import org.supercsv.io.CsvListReader;
 import org.supercsv.io.ICsvListReader;
 import org.supercsv.prefs.CsvPreference;
 
-import net.openchrom.chromatogram.msd.converter.exceptions.FileIsEmptyException;
-import net.openchrom.chromatogram.msd.converter.exceptions.FileIsNotReadableException;
-import net.openchrom.chromatogram.msd.converter.io.IChromatogramReader;
+import net.openchrom.chromatogram.converter.exceptions.FileIsEmptyException;
+import net.openchrom.chromatogram.converter.exceptions.FileIsNotReadableException;
+import net.openchrom.chromatogram.model.core.IChromatogramOverview;
+import net.openchrom.chromatogram.model.exceptions.AbundanceLimitExceededException;
+import net.openchrom.chromatogram.msd.converter.io.AbstractChromatogramMSDReader;
+import net.openchrom.chromatogram.msd.converter.io.IChromatogramMSDReader;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.preferences.BundleProductPreferences;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVChromatogram;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVIon;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVMassSpectrum;
 import net.openchrom.chromatogram.msd.model.core.AbstractIon;
-import net.openchrom.chromatogram.msd.model.core.IChromatogram;
-import net.openchrom.chromatogram.msd.model.core.IChromatogramOverview;
+import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
 import net.openchrom.chromatogram.msd.model.core.IIon;
-import net.openchrom.chromatogram.msd.model.core.ISupplierMassSpectrum;
-import net.openchrom.chromatogram.msd.model.exceptions.AbundanceLimitExceededException;
+import net.openchrom.chromatogram.msd.model.core.ISupplierScanMassSpectrum;
 import net.openchrom.chromatogram.msd.model.exceptions.IonLimitExceededException;
 import net.openchrom.logging.core.Logger;
 
@@ -41,7 +42,7 @@ import net.openchrom.logging.core.Logger;
  * 
  * @author eselmeister
  */
-public class ChromatogramReader implements IChromatogramReader {
+public class ChromatogramReader extends AbstractChromatogramMSDReader implements IChromatogramMSDReader {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramReader.class);
 	private static final String ZERO_VALUE = "0.0";
@@ -52,7 +53,7 @@ public class ChromatogramReader implements IChromatogramReader {
 	}
 
 	@Override
-	public IChromatogram read(File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
+	public IChromatogramMSD read(File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
 
 		if(isValidFileFormat(file)) {
 			return readChromatogram(file, false);
@@ -82,11 +83,11 @@ public class ChromatogramReader implements IChromatogramReader {
 		return firstColumn.equals(ChromatogramWriter.RT_MILLISECONDS_COLUMN);
 	}
 
-	private IChromatogram readChromatogram(File file, boolean overview) throws IOException {
+	private IChromatogramMSD readChromatogram(File file, boolean overview) throws IOException {
 
 		FileReader reader = new FileReader(file);
 		ICsvListReader csvListReader = new CsvListReader(reader, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
-		IChromatogram chromatogram = new CSVChromatogram();
+		IChromatogramMSD chromatogram = new CSVChromatogram();
 		if(!overview) {
 			/*
 			 * If the chromatogram shall be exportable, set the id otherwise it is null or "".
@@ -101,7 +102,7 @@ public class ChromatogramReader implements IChromatogramReader {
 		Map<Integer, Float> ionsMap = getIonMap(header);
 		List<String> lineEntries;
 		while((lineEntries = csvListReader.read()) != null) {
-			ISupplierMassSpectrum supplierMassSpectrum = getScan(lineEntries, ionsMap, overview);
+			ISupplierScanMassSpectrum supplierMassSpectrum = getScan(lineEntries, ionsMap, overview);
 			/*
 			 * TODO setParentMassSpectrum automatisch beim Hinzufügen?
 			 */
@@ -123,9 +124,9 @@ public class ChromatogramReader implements IChromatogramReader {
 		return ions;
 	}
 
-	private ISupplierMassSpectrum getScan(List<String> lineEntries, Map<Integer, Float> ionsMap, boolean overview) {
+	private ISupplierScanMassSpectrum getScan(List<String> lineEntries, Map<Integer, Float> ionsMap, boolean overview) {
 
-		ISupplierMassSpectrum massSpectrum = new CSVMassSpectrum();
+		ISupplierScanMassSpectrum massSpectrum = new CSVMassSpectrum();
 		String retentionTimeInMilliseconds = lineEntries.get(0);
 		int retentionTime = Integer.valueOf(retentionTimeInMilliseconds);
 		massSpectrum.setRetentionTime(retentionTime);
