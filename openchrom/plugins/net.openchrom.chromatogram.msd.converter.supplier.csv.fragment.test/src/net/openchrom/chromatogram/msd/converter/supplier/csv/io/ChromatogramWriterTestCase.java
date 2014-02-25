@@ -9,10 +9,10 @@ import java.io.File;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 
-import net.openchrom.chromatogram.converter.processing.chromatogram.IChromatogramExportConverterProcessingInfo;
-import net.openchrom.chromatogram.msd.converter.chromatogram.ChromatogramConverterMSD;
-import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
-import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
+import net.chemclipse.chromatogram.converter.processing.chromatogram.IChromatogramExportConverterProcessingInfo;
+import net.chemclipse.chromatogram.msd.converter.chromatogram.ChromatogramConverterMSD;
+import net.chemclipse.chromatogram.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
+import net.chemclipse.chromatogram.msd.model.core.IChromatogramMSD;
 import junit.framework.TestCase;
 
 public class ChromatogramWriterTestCase extends TestCase {

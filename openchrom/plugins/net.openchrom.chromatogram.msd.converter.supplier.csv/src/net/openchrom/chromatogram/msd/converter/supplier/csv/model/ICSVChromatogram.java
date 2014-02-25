@@ -5,7 +5,7 @@
  *******************************************************************************/
 package net.openchrom.chromatogram.msd.converter.supplier.csv.model;
 
-import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
+import net.chemclipse.chromatogram.msd.model.core.IChromatogramMSD;
 
 public interface ICSVChromatogram extends IChromatogramMSD {
 }

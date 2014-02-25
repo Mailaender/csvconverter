@@ -9,9 +9,9 @@ import java.io.File;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 
-import net.openchrom.chromatogram.msd.converter.chromatogram.ChromatogramConverterMSD;
-import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
-import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
+import net.chemclipse.chromatogram.msd.converter.chromatogram.ChromatogramConverterMSD;
+import net.chemclipse.chromatogram.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
+import net.chemclipse.chromatogram.msd.model.core.IChromatogramMSD;
 
 import junit.framework.TestCase;
 
@@ -25,7 +25,7 @@ public class ChromatogramReaderTestCase extends TestCase {
 	protected IChromatogramMSD chromatogram;
 	protected String pathImport;
 	protected File fileImport;
-	private final static String EXTENSION_POINT_ID = "net.openchrom.chromatogram.msd.converter.supplier.agilent";
+	private final static String EXTENSION_POINT_ID = "net.chemclipse.chromatogram.msd.converter.supplier.agilent";
 
 	@Override
 	protected void setUp() throws Exception {
