@@ -25,7 +25,7 @@ public class ChromatogramReaderTestCase extends TestCase {
 	protected IChromatogramMSD chromatogram;
 	protected String pathImport;
 	protected File fileImport;
-	private final static String EXTENSION_POINT_ID = "net.chemclipse.chromatogram.msd.converter.supplier.agilent";
+	private final static String EXTENSION_POINT_ID = "net.openchrom.chromatogram.msd.converter.supplier.agilent";
 
 	@Override
 	protected void setUp() throws Exception {
