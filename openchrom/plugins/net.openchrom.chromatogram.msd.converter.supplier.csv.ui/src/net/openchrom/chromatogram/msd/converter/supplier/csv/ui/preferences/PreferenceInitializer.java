@@ -6,8 +6,11 @@
 package net.openchrom.chromatogram.msd.converter.supplier.csv.ui.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
+import org.eclipse.jface.preference.IPreferenceStore;
 
-// import org.eclipse.jface.preference.IPreferenceStore;
+import net.openchrom.chromatogram.msd.converter.supplier.csv.preferences.ConverterPreferences;
+import net.openchrom.chromatogram.msd.converter.supplier.csv.ui.Activator;
+
 /**
  * Class used to initialize default preference values.
  */
@@ -20,7 +23,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 */
 	public void initializeDefaultPreferences() {
 
-		// IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		// store.setDefault(PreferenceConstants.P_USE_SETTINGS, true);
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		store.setDefault(ConverterPreferences.P_USE_TIC, ConverterPreferences.DEF_USE_TIC);
 	}
 }
