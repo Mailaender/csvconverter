@@ -115,7 +115,7 @@ public class ChromatogramWriter implements IChromatogramMSDWriter {
 		 * Write the data.
 		 */
 		List<Number> scanValues;
-		for(ITotalScanSignal totalScanSignal : totalScanSignals.getTotalIonSignals()) {
+		for(ITotalScanSignal totalScanSignal : totalScanSignals.getTotalScanSignals()) {
 			scanValues = new ArrayList<Number>();
 			/*
 			 * RT (milliseconds)
