@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2013 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2014 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -9,9 +9,9 @@ import java.io.File;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 
-import net.openchrom.chromatogram.msd.converter.chromatogram.ChromatogramConverterMSD;
-import net.openchrom.chromatogram.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
-import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
+import net.chemclipse.chromatogram.msd.converter.chromatogram.ChromatogramConverterMSD;
+import net.chemclipse.chromatogram.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
+import net.chemclipse.chromatogram.msd.model.core.IChromatogramMSD;
 
 import junit.framework.TestCase;
 

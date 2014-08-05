@@ -54,15 +54,6 @@
     <module>../../plugins/net.openchrom.chromatogram.msd.converter.supplier.csv.ui</module>
     <module>../../features/net.openchrom.chromatogram.msd.converter.supplier.csv.feature</module>
     <!--<module>../../plugins/net.openchrom.chromatogram.msd.converter.supplier.csv.fragment.test</module>-->
-    <!--<module>../../plugins/net.openchrom.chromatogram.msd.converter.supplier.csv.ui.fragment.test</module>-->
     <module>../../sites/net.openchrom.chromatogram.msd.converter.supplier.csv.updateSite</module>
   </modules>
-  <!--
-	SOURCE CODE MANAGEMENT
-  -->
-  <scm>
-    <connection>scm:git:file:///media/3A132BBA0C9C1015/GIT-REPOSITORIES/www.openchrom.de/csvconverter</connection>
-    <developerConnection>scm:git:file:///media/3A132BBA0C9C1015/GIT-REPOSITORIES/www.openchrom.de/csvconverter</developerConnection>
-    <url>file:///media/3A132BBA0C9C1015/GIT-REPOSITORIES/www.openchrom.de/csvconverter</url>
-  </scm>
 </project>

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2013 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2014 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -17,20 +17,26 @@ import org.supercsv.io.CsvListWriter;
 import org.supercsv.io.ICsvListWriter;
 import org.supercsv.prefs.CsvPreference;
 
-import net.openchrom.chromatogram.converter.exceptions.FileIsNotWriteableException;
-import net.openchrom.chromatogram.model.exceptions.ChromatogramIsNullException;
-import net.openchrom.chromatogram.msd.converter.io.IChromatogramMSDWriter;
-import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
-import net.openchrom.chromatogram.msd.model.xic.ExtractedIonSignalExtractor;
-import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignal;
-import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignalExtractor;
-import net.openchrom.chromatogram.msd.model.xic.IExtractedIonSignals;
+import net.chemclipse.chromatogram.converter.exceptions.FileIsNotWriteableException;
+import net.chemclipse.chromatogram.model.exceptions.ChromatogramIsNullException;
+import net.chemclipse.chromatogram.model.signals.ITotalScanSignal;
+import net.chemclipse.chromatogram.model.signals.ITotalScanSignals;
+import net.chemclipse.chromatogram.msd.converter.io.IChromatogramMSDWriter;
+import net.chemclipse.chromatogram.msd.model.core.IChromatogramMSD;
+import net.chemclipse.chromatogram.msd.model.xic.ExtractedIonSignalExtractor;
+import net.chemclipse.chromatogram.msd.model.xic.IExtractedIonSignal;
+import net.chemclipse.chromatogram.msd.model.xic.IExtractedIonSignalExtractor;
+import net.chemclipse.chromatogram.msd.model.xic.IExtractedIonSignals;
+import net.chemclipse.chromatogram.msd.model.xic.ITotalIonSignalExtractor;
+import net.chemclipse.chromatogram.msd.model.xic.TotalIonSignalExtractor;
+import net.openchrom.chromatogram.msd.converter.supplier.csv.preferences.ConverterPreferences;
 
 public class ChromatogramWriter implements IChromatogramMSDWriter {
 
 	public static final String RT_MILLISECONDS_COLUMN = "RT(milliseconds)";
 	public static final String RT_MINUTES_COLUMN = "RT(minutes) - NOT USED BY IMPORT";
 	public static final String RI_COLUMN = "RI";
+	public static final String TIC_COLUMN = "TIC";
 
 	public ChromatogramWriter() {
 
@@ -48,12 +54,22 @@ public class ChromatogramWriter implements IChromatogramMSDWriter {
 		 * Get the chromatographic data.
 		 */
 		try {
-			IExtractedIonSignalExtractor extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
-			IExtractedIonSignals extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals();
-			int startIon = extractedIonSignals.getStartIon();
-			int stopIon = extractedIonSignals.getStopIon();
-			writeHeader(csvListWriter, startIon, stopIon);
-			writeScans(csvListWriter, extractedIonSignals, startIon, stopIon);
+			/*
+			 * TIC / XIC
+			 */
+			if(ConverterPreferences.isUseTic()) {
+				ITotalIonSignalExtractor totalIonSignalExtractor = new TotalIonSignalExtractor(chromatogram);
+				ITotalScanSignals totalScanSignals = totalIonSignalExtractor.getTotalScanSignals();
+				writeHeaderTIC(csvListWriter);
+				writeScansTIC(csvListWriter, totalScanSignals);
+			} else {
+				IExtractedIonSignalExtractor extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
+				IExtractedIonSignals extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals();
+				int startIon = extractedIonSignals.getStartIon();
+				int stopIon = extractedIonSignals.getStopIon();
+				writeHeaderXIC(csvListWriter, startIon, stopIon);
+				writeScansXIC(csvListWriter, extractedIonSignals, startIon, stopIon);
+			}
 		} catch(ChromatogramIsNullException e) {
 			throw new IOException("The chromatogram is null.");
 		} finally {
@@ -61,7 +77,22 @@ public class ChromatogramWriter implements IChromatogramMSDWriter {
 		}
 	}
 
-	private void writeHeader(ICsvListWriter csvListWriter, int startIon, int stopIon) throws IOException {
+	private void writeHeaderTIC(ICsvListWriter csvListWriter) throws IOException {
+
+		/*
+		 * Write the header.
+		 * RT(milliseconds), RT(minutes) - NOT USED BY IMPORT, RI, ion 18, ...
+		 */
+		List<String> headerList = new ArrayList<String>();
+		headerList.add(RT_MILLISECONDS_COLUMN);
+		headerList.add(RT_MINUTES_COLUMN);
+		headerList.add(RI_COLUMN);
+		headerList.add(TIC_COLUMN);
+		String[] header = headerList.toArray(new String[]{});
+		csvListWriter.writeHeader(header);
+	}
+
+	private void writeHeaderXIC(ICsvListWriter csvListWriter, int startIon, int stopIon) throws IOException {
 
 		/*
 		 * Write the header.
@@ -78,7 +109,29 @@ public class ChromatogramWriter implements IChromatogramMSDWriter {
 		csvListWriter.writeHeader(header);
 	}
 
-	private void writeScans(ICsvListWriter csvListWriter, IExtractedIonSignals extractedIonSignals, int startIon, int stopIon) throws IOException {
+	private void writeScansTIC(ICsvListWriter csvListWriter, ITotalScanSignals totalScanSignals) throws IOException {
+
+		/*
+		 * Write the data.
+		 */
+		List<Number> scanValues;
+		for(ITotalScanSignal totalScanSignal : totalScanSignals.getTotalScanSignals()) {
+			scanValues = new ArrayList<Number>();
+			/*
+			 * RT (milliseconds)
+			 * RT(minutes)
+			 * RI
+			 */
+			int milliseconds = totalScanSignal.getRetentionTime();
+			scanValues.add(milliseconds);
+			scanValues.add(milliseconds / IChromatogramMSD.MINUTE_CORRELATION_FACTOR);
+			scanValues.add(totalScanSignal.getRetentionIndex());
+			scanValues.add(totalScanSignal.getTotalSignal());
+			csvListWriter.write(scanValues);
+		}
+	}
+
+	private void writeScansXIC(ICsvListWriter csvListWriter, IExtractedIonSignals extractedIonSignals, int startIon, int stopIon) throws IOException {
 
 		/*
 		 * Write the data.

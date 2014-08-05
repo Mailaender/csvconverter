@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2013 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2014 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
@@ -19,22 +19,22 @@ import org.supercsv.io.CsvListReader;
 import org.supercsv.io.ICsvListReader;
 import org.supercsv.prefs.CsvPreference;
 
-import net.openchrom.chromatogram.converter.exceptions.FileIsEmptyException;
-import net.openchrom.chromatogram.converter.exceptions.FileIsNotReadableException;
-import net.openchrom.chromatogram.model.core.IChromatogramOverview;
-import net.openchrom.chromatogram.model.exceptions.AbundanceLimitExceededException;
-import net.openchrom.chromatogram.msd.converter.io.AbstractChromatogramMSDReader;
-import net.openchrom.chromatogram.msd.converter.io.IChromatogramMSDReader;
+import net.chemclipse.chromatogram.converter.exceptions.FileIsEmptyException;
+import net.chemclipse.chromatogram.converter.exceptions.FileIsNotReadableException;
+import net.chemclipse.chromatogram.model.core.IChromatogramOverview;
+import net.chemclipse.chromatogram.model.exceptions.AbundanceLimitExceededException;
+import net.chemclipse.chromatogram.msd.converter.io.AbstractChromatogramMSDReader;
+import net.chemclipse.chromatogram.msd.converter.io.IChromatogramMSDReader;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.preferences.BundleProductPreferences;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVChromatogram;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVIon;
 import net.openchrom.chromatogram.msd.converter.supplier.csv.model.CSVMassSpectrum;
-import net.openchrom.chromatogram.msd.model.core.AbstractIon;
-import net.openchrom.chromatogram.msd.model.core.IChromatogramMSD;
-import net.openchrom.chromatogram.msd.model.core.IIon;
-import net.openchrom.chromatogram.msd.model.core.ISupplierScanMassSpectrum;
-import net.openchrom.chromatogram.msd.model.exceptions.IonLimitExceededException;
-import net.openchrom.logging.core.Logger;
+import net.chemclipse.chromatogram.msd.model.core.AbstractIon;
+import net.chemclipse.chromatogram.msd.model.core.IChromatogramMSD;
+import net.chemclipse.chromatogram.msd.model.core.IIon;
+import net.chemclipse.chromatogram.msd.model.core.ISupplierScanMassSpectrum;
+import net.chemclipse.chromatogram.msd.model.exceptions.IonLimitExceededException;
+import net.chemclipse.logging.core.Logger;
 
 /**
  * This class is responsible to read a Agilent Chromatogram from its binary

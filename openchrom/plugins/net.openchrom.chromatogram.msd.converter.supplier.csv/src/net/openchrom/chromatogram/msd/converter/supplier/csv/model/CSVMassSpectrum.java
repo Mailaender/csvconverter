@@ -1,15 +1,15 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2013 Philip (eselmeister) Wenig.
+ * Copyright (c) 2011, 2014 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
  *******************************************************************************/
 package net.openchrom.chromatogram.msd.converter.supplier.csv.model;
 
-import net.openchrom.chromatogram.model.exceptions.AbundanceLimitExceededException;
-import net.openchrom.chromatogram.msd.model.core.AbstractSupplierScanMassSpectrum;
-import net.openchrom.chromatogram.msd.model.core.IIon;
-import net.openchrom.chromatogram.msd.model.exceptions.IonLimitExceededException;
-import net.openchrom.logging.core.Logger;
+import net.chemclipse.chromatogram.model.exceptions.AbundanceLimitExceededException;
+import net.chemclipse.chromatogram.msd.model.core.AbstractSupplierScanMassSpectrum;
+import net.chemclipse.chromatogram.msd.model.core.IIon;
+import net.chemclipse.chromatogram.msd.model.exceptions.IonLimitExceededException;
+import net.chemclipse.logging.core.Logger;
 
 public class CSVMassSpectrum extends AbstractSupplierScanMassSpectrum implements ICSVMassSpectrum {
 
