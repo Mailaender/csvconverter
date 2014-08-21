@@ -24,7 +24,7 @@ public class BundleProductPreferences extends AbstractBundleProductPreferences i
 	/*
 	 * READER VERSION
 	 */
-	private static final String PRODUCT_ID = "net.openchrom.msd.converter.supplier.csv";
+	private static final String PRODUCT_ID = "net.openchrom.chromatogram.msd.converter.supplier.csv";
 	public static final String CONVERTER_ID = ""; // Must be "", it should be not possible to save the chromatogram using the chromatogram editor.
 	private static final int TRIAL_DAYS = 30;
 
