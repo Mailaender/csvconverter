@@ -5,7 +5,7 @@
  *******************************************************************************/
 package net.openchrom.msd.converter.supplier.csv.model;
 
-import net.chemclipse.chromatogram.model.exceptions.AbundanceLimitExceededException;
+import net.chemclipse.model.exceptions.AbundanceLimitExceededException;
 import net.chemclipse.msd.model.core.AbstractSupplierScanMassSpectrum;
 import net.chemclipse.msd.model.core.IIon;
 import net.chemclipse.msd.model.exceptions.IonLimitExceededException;

@@ -18,9 +18,9 @@ import org.supercsv.io.ICsvListWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import net.chemclipse.converter.exceptions.FileIsNotWriteableException;
-import net.chemclipse.chromatogram.model.exceptions.ChromatogramIsNullException;
-import net.chemclipse.chromatogram.model.signals.ITotalScanSignal;
-import net.chemclipse.chromatogram.model.signals.ITotalScanSignals;
+import net.chemclipse.model.exceptions.ChromatogramIsNullException;
+import net.chemclipse.model.signals.ITotalScanSignal;
+import net.chemclipse.model.signals.ITotalScanSignals;
 import net.chemclipse.msd.converter.io.IChromatogramMSDWriter;
 import net.chemclipse.msd.model.core.IChromatogramMSD;
 import net.chemclipse.msd.model.xic.ExtractedIonSignalExtractor;
