@@ -16,7 +16,7 @@ public class ChromatogramReader_1_ITest extends ChromatogramWriterTestCase {
 		 * Import
 		 */
 		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
-		extensionPointImport = "net.chemclipse.chromatogram.xxd.converter.supplier.openchrom";
+		extensionPointImport = "net.chemclipse.xxd.converter.supplier.openchrom";
 		/*
 		 * Export/Reimport
 		 */
