@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Eclipse-RegisterBuddy: net.chemclipse.model, net.chemclipse.msd.model, net.chemclipse.thirdpartylibraries.junitaddons
+Eclipse-RegisterBuddy: net.chemclipse.model, net.chemclipse.msd.model
 Bundle-ManifestVersion: 2
 Bundle-Name: Csv
 Bundle-SymbolicName: net.openchrom.msd.converter.supplier.csv;singleton:=true
