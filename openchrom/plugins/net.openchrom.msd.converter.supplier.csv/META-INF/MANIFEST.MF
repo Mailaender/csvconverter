@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.core.runtime,
  net.chemclipse.msd.model;bundle-version="0.7.0",
  net.chemclipse.logging;bundle-version="0.7.0",
  net.openchrom.keys;bundle-version="1.0.0",
- net.chemclipse.thirdpartylibraries.supercsv;bundle-version="1.52.0",
+ net.openchrom.thirdpartylibraries.supercsv;bundle-version="1.52.0",
  net.chemclipse.processing;bundle-version="0.7.0",
  net.chemclipse.converter;bundle-version="0.7.0",
  net.chemclipse.model;bundle-version="0.7.0"
