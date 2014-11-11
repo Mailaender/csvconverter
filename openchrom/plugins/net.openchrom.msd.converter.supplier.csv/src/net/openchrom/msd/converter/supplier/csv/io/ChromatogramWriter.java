@@ -29,7 +29,7 @@ import net.chemclipse.msd.model.xic.IExtractedIonSignalExtractor;
 import net.chemclipse.msd.model.xic.IExtractedIonSignals;
 import net.chemclipse.msd.model.xic.ITotalIonSignalExtractor;
 import net.chemclipse.msd.model.xic.TotalIonSignalExtractor;
-import net.openchrom.msd.converter.supplier.csv.preferences.ConverterPreferences;
+import net.openchrom.msd.converter.supplier.csv.preferences.PreferenceSupplier;
 
 public class ChromatogramWriter implements IChromatogramMSDWriter {
 
@@ -57,7 +57,7 @@ public class ChromatogramWriter implements IChromatogramMSDWriter {
 			/*
 			 * TIC / XIC
 			 */
-			if(ConverterPreferences.isUseTic()) {
+			if(PreferenceSupplier.isUseTic()) {
 				ITotalIonSignalExtractor totalIonSignalExtractor = new TotalIonSignalExtractor(chromatogram);
 				ITotalScanSignals totalScanSignals = totalIonSignalExtractor.getTotalScanSignals();
 				writeHeaderTIC(csvListWriter);
