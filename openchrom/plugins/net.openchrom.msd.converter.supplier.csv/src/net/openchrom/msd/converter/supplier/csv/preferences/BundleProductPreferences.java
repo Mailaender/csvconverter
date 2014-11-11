@@ -7,10 +7,11 @@ package net.openchrom.msd.converter.supplier.csv.preferences;
 
 import net.openchrom.keys.preferences.AbstractBundleProductPreferences;
 import net.openchrom.keys.preferences.IBundleProductPreferences;
+import net.openchrom.msd.converter.supplier.csv.Activator;
 
 public class BundleProductPreferences extends AbstractBundleProductPreferences implements IBundleProductPreferences {
 
-	public static final String PREFERENCE_NODE = "net.openchrom.msd.converter.supplier.csv.ui";
+	public static final String PREFERENCE_NODE = Activator.getContext().getBundle().getSymbolicName();
 	/*
 	 * Trial version (only read option). The key generator (php) needs to have
 	 * the same product id (index.php $pluginIdentifier).
