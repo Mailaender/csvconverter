@@ -6,12 +6,12 @@
 package net.openchrom.msd.converter.supplier.csv.model;
 
 import net.chemclipse.model.exceptions.AbundanceLimitExceededException;
-import net.chemclipse.msd.model.core.AbstractSupplierScanMassSpectrum;
+import net.chemclipse.msd.model.core.AbstractSupplierMassSpectrum;
 import net.chemclipse.msd.model.core.IIon;
 import net.chemclipse.msd.model.exceptions.IonLimitExceededException;
 import net.chemclipse.logging.core.Logger;
 
-public class CSVMassSpectrum extends AbstractSupplierScanMassSpectrum implements ICSVMassSpectrum {
+public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICSVMassSpectrum {
 
 	/**
 	 * Renew the serialVersionUID any time you have changed some fields or
