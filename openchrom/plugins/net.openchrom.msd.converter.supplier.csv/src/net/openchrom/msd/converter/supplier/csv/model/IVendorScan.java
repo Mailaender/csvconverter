@@ -5,7 +5,7 @@
  *******************************************************************************/
 package net.openchrom.msd.converter.supplier.csv.model;
 
-import net.chemclipse.msd.model.core.ISupplierMassSpectrum;
+import net.chemclipse.msd.model.core.IVendorMassSpectrum;
 
-public interface ICSVMassSpectrum extends ISupplierMassSpectrum {
+public interface IVendorScan extends IVendorMassSpectrum {
 }

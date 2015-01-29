@@ -27,12 +27,12 @@ import net.chemclipse.msd.converter.io.AbstractChromatogramMSDReader;
 import net.chemclipse.msd.converter.io.IChromatogramMSDReader;
 import net.openchrom.msd.converter.supplier.csv.preferences.BundleProductPreferences;
 import net.openchrom.msd.converter.supplier.csv.model.CSVChromatogram;
-import net.openchrom.msd.converter.supplier.csv.model.CSVIon;
-import net.openchrom.msd.converter.supplier.csv.model.CSVMassSpectrum;
+import net.openchrom.msd.converter.supplier.csv.model.VendorIon;
+import net.openchrom.msd.converter.supplier.csv.model.VendorScan;
 import net.chemclipse.msd.model.core.AbstractIon;
 import net.chemclipse.msd.model.core.IChromatogramMSD;
 import net.chemclipse.msd.model.core.IIon;
-import net.chemclipse.msd.model.core.ISupplierMassSpectrum;
+import net.chemclipse.msd.model.core.IVendorMassSpectrum;
 import net.chemclipse.msd.model.exceptions.IonLimitExceededException;
 import net.chemclipse.logging.core.Logger;
 
@@ -102,7 +102,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 		Map<Integer, Float> ionsMap = getIonMap(header);
 		List<String> lineEntries;
 		while((lineEntries = csvListReader.read()) != null) {
-			ISupplierMassSpectrum supplierMassSpectrum = getScan(lineEntries, ionsMap, overview);
+			IVendorMassSpectrum supplierMassSpectrum = getScan(lineEntries, ionsMap, overview);
 			/*
 			 * TODO setParentMassSpectrum automatisch beim Hinzufügen?
 			 */
@@ -124,9 +124,9 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 		return ions;
 	}
 
-	private ISupplierMassSpectrum getScan(List<String> lineEntries, Map<Integer, Float> ionsMap, boolean overview) {
+	private IVendorMassSpectrum getScan(List<String> lineEntries, Map<Integer, Float> ionsMap, boolean overview) {
 
-		ISupplierMassSpectrum massSpectrum = new CSVMassSpectrum();
+		IVendorMassSpectrum massSpectrum = new VendorScan();
 		String retentionTimeInMilliseconds = lineEntries.get(0);
 		int retentionTime = Integer.valueOf(retentionTimeInMilliseconds);
 		massSpectrum.setRetentionTime(retentionTime);
@@ -165,7 +165,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 				abundanceTotalSignal += abundance;
 			}
 		}
-		IIon ion = new CSVIon(AbstractIon.TIC_ION, abundanceTotalSignal);
+		IIon ion = new VendorIon(AbstractIon.TIC_ION, abundanceTotalSignal);
 		return ion;
 	}
 
@@ -178,7 +178,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 				float abundance = Float.valueOf(abundanceValue);
 				float ion = ionsMap.get(index);
 				try {
-					IIon csvIon = new CSVIon(ion, abundance);
+					IIon csvIon = new VendorIon(ion, abundance);
 					ions.add(csvIon);
 				} catch(AbundanceLimitExceededException e) {
 					logger.warn(e);

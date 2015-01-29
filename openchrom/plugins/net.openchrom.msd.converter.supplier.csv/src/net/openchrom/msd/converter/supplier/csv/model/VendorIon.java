@@ -6,10 +6,10 @@
 package net.openchrom.msd.converter.supplier.csv.model;
 
 import net.chemclipse.model.exceptions.AbundanceLimitExceededException;
-import net.chemclipse.msd.model.core.AbstractSupplierIon;
+import net.chemclipse.msd.model.core.AbstractScanIon;
 import net.chemclipse.msd.model.exceptions.IonLimitExceededException;
 
-public class CSVIon extends AbstractSupplierIon implements ICSVIon {
+public class VendorIon extends AbstractScanIon implements IVendorIon {
 
 	/**
 	 * Renew the serialVersionUID any time you have changed some fields or
@@ -22,18 +22,18 @@ public class CSVIon extends AbstractSupplierIon implements ICSVIon {
 	public static final double MIN_ION = 1.0d;
 	public static final double MAX_ION = 50000.0d;
 
-	public CSVIon(double ion) throws IonLimitExceededException {
+	public VendorIon(double ion) throws IonLimitExceededException {
 
 		super(ion);
 	}
 
-	public CSVIon(double ion, boolean ignoreAbundanceLimit) throws IonLimitExceededException {
+	public VendorIon(double ion, boolean ignoreAbundanceLimit) throws IonLimitExceededException {
 
 		super(ion);
 		setIgnoreAbundanceLimit(ignoreAbundanceLimit);
 	}
 
-	public CSVIon(double ion, float abundance) throws AbundanceLimitExceededException, IonLimitExceededException {
+	public VendorIon(double ion, float abundance) throws AbundanceLimitExceededException, IonLimitExceededException {
 
 		super(ion, abundance);
 	}

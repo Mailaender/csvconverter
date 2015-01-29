@@ -6,19 +6,19 @@
 package net.openchrom.msd.converter.supplier.csv.model;
 
 import net.chemclipse.model.exceptions.AbundanceLimitExceededException;
-import net.chemclipse.msd.model.core.AbstractSupplierMassSpectrum;
+import net.chemclipse.msd.model.core.AbstractVendorMassSpectrum;
 import net.chemclipse.msd.model.core.IIon;
 import net.chemclipse.msd.model.exceptions.IonLimitExceededException;
 import net.chemclipse.logging.core.Logger;
 
-public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICSVMassSpectrum {
+public class VendorScan extends AbstractVendorMassSpectrum implements IVendorScan {
 
 	/**
 	 * Renew the serialVersionUID any time you have changed some fields or
 	 * methods.
 	 */
 	private static final long serialVersionUID = -8416701833314906892L;
-	private static final Logger logger = Logger.getLogger(CSVMassSpectrum.class);
+	private static final Logger logger = Logger.getLogger(VendorScan.class);
 	/*
 	 * MIN/MAX Bounds
 	 */
@@ -70,10 +70,10 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 	 * ISupplierMassSpectrum is a subtype of IMassSpectrum.
 	 */
 	@Override
-	public ICSVMassSpectrum makeDeepCopy() throws CloneNotSupportedException {
+	public IVendorScan makeDeepCopy() throws CloneNotSupportedException {
 
-		ICSVMassSpectrum massSpectrum = (ICSVMassSpectrum)super.clone();
-		ICSVIon csvIon;
+		IVendorScan massSpectrum = (IVendorScan)super.clone();
+		IVendorIon csvIon;
 		/*
 		 * The instance variables have been copied by super.clone();.<br/> The
 		 * ions in the ion list need not to be removed via
@@ -84,7 +84,7 @@ public class CSVMassSpectrum extends AbstractSupplierMassSpectrum implements ICS
 		 */
 		for(IIon ion : getIons()) {
 			try {
-				csvIon = new CSVIon(ion.getIon(), ion.getAbundance());
+				csvIon = new VendorIon(ion.getIon(), ion.getAbundance());
 				massSpectrum.addIon(csvIon);
 			} catch(AbundanceLimitExceededException e) {
 				logger.warn(e);
