@@ -5,13 +5,7 @@
  *******************************************************************************/
 package net.openchrom.msd.converter.supplier.csv.model;
 
-import net.chemclipse.msd.model.core.AbstractChromatogramMSD;
+import net.chemclipse.msd.model.core.IChromatogramMSD;
 
-public class CSVChromatogram extends AbstractChromatogramMSD implements ICSVChromatogram {
-
-	@Override
-	public String getName() {
-
-		return extractNameFromFile("CSVChromatogram");
-	}
+public interface IVendorChromatogram extends IChromatogramMSD {
 }

@@ -26,7 +26,7 @@ import net.chemclipse.model.exceptions.AbundanceLimitExceededException;
 import net.chemclipse.msd.converter.io.AbstractChromatogramMSDReader;
 import net.chemclipse.msd.converter.io.IChromatogramMSDReader;
 import net.openchrom.msd.converter.supplier.csv.preferences.BundleProductPreferences;
-import net.openchrom.msd.converter.supplier.csv.model.CSVChromatogram;
+import net.openchrom.msd.converter.supplier.csv.model.VendorChromatogram;
 import net.openchrom.msd.converter.supplier.csv.model.VendorIon;
 import net.openchrom.msd.converter.supplier.csv.model.VendorScan;
 import net.chemclipse.msd.model.core.AbstractIon;
@@ -87,7 +87,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 
 		FileReader reader = new FileReader(file);
 		ICsvListReader csvListReader = new CsvListReader(reader, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
-		IChromatogramMSD chromatogram = new CSVChromatogram();
+		IChromatogramMSD chromatogram = new VendorChromatogram();
 		if(!overview) {
 			/*
 			 * If the chromatogram shall be exportable, set the id otherwise it is null or "".
