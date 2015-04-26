@@ -5,7 +5,7 @@
  *******************************************************************************/
 package net.openchrom.msd.converter.supplier.csv.model;
 
-import net.chemclipse.msd.model.core.IScanIon;
+import org.eclipse.chemclipse.msd.model.core.IScanIon;
 
 public interface IVendorIon extends IScanIon {
 }

@@ -9,9 +9,9 @@ import java.io.File;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 
-import net.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
-import net.chemclipse.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
-import net.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
+import org.eclipse.chemclipse.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 
 import junit.framework.TestCase;
 

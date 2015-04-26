@@ -16,12 +16,12 @@ public class ChromatogramReader_1_ITest extends ChromatogramWriterTestCase {
 		 * Import
 		 */
 		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
-		extensionPointImport = "net.chemclipse.xxd.converter.supplier.chemclipse";
+		extensionPointImport = "org.eclipse.chemclipse.xxd.converter.supplier.chemclipse";
 		/*
 		 * Export/Reimport
 		 */
 		pathExport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_EXPORT_TEST);
-		extensionPointExportReimport = "net.chemclipse.msd.converter.supplier.csv";
+		extensionPointExportReimport = "org.eclipse.chemclipse.msd.converter.supplier.csv";
 		super.setUp();
 	}
 

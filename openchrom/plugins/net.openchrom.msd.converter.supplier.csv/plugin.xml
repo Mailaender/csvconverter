@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="net.chemclipse.msd.converter.chromatogramSupplier">
+         point="org.eclipse.chemclipse.msd.converter.chromatogramSupplier">
       <ChromatogramSupplier
             description="Reads and Writes Chromatograms to CSV."
             exportConverter="net.openchrom.msd.converter.supplier.csv.converter.CSVChromatogramExportConverter"

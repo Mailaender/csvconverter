@@ -5,7 +5,7 @@
  *******************************************************************************/
 package net.openchrom.msd.converter.supplier.csv.model;
 
-import net.chemclipse.msd.model.core.AbstractChromatogramMSD;
+import org.eclipse.chemclipse.msd.model.core.AbstractChromatogramMSD;
 
 public class VendorChromatogram extends AbstractChromatogramMSD implements IVendorChromatogram {
 

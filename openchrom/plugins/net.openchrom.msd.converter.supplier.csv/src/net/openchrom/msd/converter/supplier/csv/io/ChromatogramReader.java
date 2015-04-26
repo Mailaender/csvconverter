@@ -19,22 +19,22 @@ import org.supercsv.io.CsvListReader;
 import org.supercsv.io.ICsvListReader;
 import org.supercsv.prefs.CsvPreference;
 
-import net.chemclipse.converter.exceptions.FileIsEmptyException;
-import net.chemclipse.converter.exceptions.FileIsNotReadableException;
-import net.chemclipse.model.core.IChromatogramOverview;
-import net.chemclipse.model.exceptions.AbundanceLimitExceededException;
-import net.chemclipse.msd.converter.io.AbstractChromatogramMSDReader;
-import net.chemclipse.msd.converter.io.IChromatogramMSDReader;
+import org.eclipse.chemclipse.converter.exceptions.FileIsEmptyException;
+import org.eclipse.chemclipse.converter.exceptions.FileIsNotReadableException;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
+import org.eclipse.chemclipse.model.exceptions.AbundanceLimitExceededException;
+import org.eclipse.chemclipse.msd.converter.io.AbstractChromatogramMSDReader;
+import org.eclipse.chemclipse.msd.converter.io.IChromatogramMSDReader;
 import net.openchrom.msd.converter.supplier.csv.preferences.BundleProductPreferences;
 import net.openchrom.msd.converter.supplier.csv.model.VendorChromatogram;
 import net.openchrom.msd.converter.supplier.csv.model.VendorIon;
 import net.openchrom.msd.converter.supplier.csv.model.VendorScan;
-import net.chemclipse.msd.model.core.AbstractIon;
-import net.chemclipse.msd.model.core.IChromatogramMSD;
-import net.chemclipse.msd.model.core.IIon;
-import net.chemclipse.msd.model.core.IVendorMassSpectrum;
-import net.chemclipse.msd.model.exceptions.IonLimitExceededException;
-import net.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.msd.model.core.AbstractIon;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.msd.model.core.IIon;
+import org.eclipse.chemclipse.msd.model.core.IVendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.exceptions.IonLimitExceededException;
+import org.eclipse.chemclipse.logging.core.Logger;
 
 /**
  * This class is responsible to read a Agilent Chromatogram from its binary

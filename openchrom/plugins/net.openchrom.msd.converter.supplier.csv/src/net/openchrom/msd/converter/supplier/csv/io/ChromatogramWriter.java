@@ -17,18 +17,18 @@ import org.supercsv.io.CsvListWriter;
 import org.supercsv.io.ICsvListWriter;
 import org.supercsv.prefs.CsvPreference;
 
-import net.chemclipse.converter.exceptions.FileIsNotWriteableException;
-import net.chemclipse.model.exceptions.ChromatogramIsNullException;
-import net.chemclipse.model.signals.ITotalScanSignal;
-import net.chemclipse.model.signals.ITotalScanSignals;
-import net.chemclipse.msd.converter.io.IChromatogramMSDWriter;
-import net.chemclipse.msd.model.core.IChromatogramMSD;
-import net.chemclipse.msd.model.xic.ExtractedIonSignalExtractor;
-import net.chemclipse.msd.model.xic.IExtractedIonSignal;
-import net.chemclipse.msd.model.xic.IExtractedIonSignalExtractor;
-import net.chemclipse.msd.model.xic.IExtractedIonSignals;
-import net.chemclipse.msd.model.xic.ITotalIonSignalExtractor;
-import net.chemclipse.msd.model.xic.TotalIonSignalExtractor;
+import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
+import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
+import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
+import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
+import org.eclipse.chemclipse.msd.converter.io.IChromatogramMSDWriter;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignalExtractor;
+import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
+import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignalExtractor;
+import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
+import org.eclipse.chemclipse.msd.model.xic.ITotalIonSignalExtractor;
+import org.eclipse.chemclipse.msd.model.xic.TotalIonSignalExtractor;
 import net.openchrom.msd.converter.supplier.csv.preferences.PreferenceSupplier;
 
 public class ChromatogramWriter implements IChromatogramMSDWriter {

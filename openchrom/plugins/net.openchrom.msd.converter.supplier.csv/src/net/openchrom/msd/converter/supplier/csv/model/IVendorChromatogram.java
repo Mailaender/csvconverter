@@ -5,7 +5,7 @@
  *******************************************************************************/
 package net.openchrom.msd.converter.supplier.csv.model;
 
-import net.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 
 public interface IVendorChromatogram extends IChromatogramMSD {
 }

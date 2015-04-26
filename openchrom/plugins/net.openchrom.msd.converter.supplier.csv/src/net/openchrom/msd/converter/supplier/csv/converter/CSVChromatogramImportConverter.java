@@ -9,20 +9,20 @@ import java.io.File;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import net.chemclipse.converter.processing.chromatogram.ChromatogramOverviewImportConverterProcessingInfo;
-import net.chemclipse.converter.processing.chromatogram.IChromatogramOverviewImportConverterProcessingInfo;
-import net.chemclipse.model.core.IChromatogramOverview;
-import net.chemclipse.msd.converter.chromatogram.AbstractChromatogramMSDImportConverter;
-import net.chemclipse.msd.converter.io.IChromatogramMSDReader;
-import net.chemclipse.msd.converter.processing.chromatogram.ChromatogramMSDImportConverterProcessingInfo;
-import net.chemclipse.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
+import org.eclipse.chemclipse.converter.processing.chromatogram.ChromatogramOverviewImportConverterProcessingInfo;
+import org.eclipse.chemclipse.converter.processing.chromatogram.IChromatogramOverviewImportConverterProcessingInfo;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
+import org.eclipse.chemclipse.msd.converter.chromatogram.AbstractChromatogramMSDImportConverter;
+import org.eclipse.chemclipse.msd.converter.io.IChromatogramMSDReader;
+import org.eclipse.chemclipse.msd.converter.processing.chromatogram.ChromatogramMSDImportConverterProcessingInfo;
+import org.eclipse.chemclipse.msd.converter.processing.chromatogram.IChromatogramMSDImportConverterProcessingInfo;
 import net.openchrom.msd.converter.supplier.csv.Activator;
 import net.openchrom.msd.converter.supplier.csv.internal.converter.SpecificationValidator;
 import net.openchrom.msd.converter.supplier.csv.internal.support.IConstants;
 import net.openchrom.msd.converter.supplier.csv.io.ChromatogramReader;
-import net.chemclipse.msd.model.core.IChromatogramMSD;
-import net.chemclipse.logging.core.Logger;
-import net.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 
 public class CSVChromatogramImportConverter extends AbstractChromatogramMSDImportConverter {
 

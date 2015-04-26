@@ -5,9 +5,9 @@
  *******************************************************************************/
 package net.openchrom.msd.converter.supplier.csv.model;
 
-import net.chemclipse.model.exceptions.AbundanceLimitExceededException;
-import net.chemclipse.msd.model.core.AbstractScanIon;
-import net.chemclipse.msd.model.exceptions.IonLimitExceededException;
+import org.eclipse.chemclipse.model.exceptions.AbundanceLimitExceededException;
+import org.eclipse.chemclipse.msd.model.core.AbstractScanIon;
+import org.eclipse.chemclipse.msd.model.exceptions.IonLimitExceededException;
 
 public class VendorIon extends AbstractScanIon implements IVendorIon {
 

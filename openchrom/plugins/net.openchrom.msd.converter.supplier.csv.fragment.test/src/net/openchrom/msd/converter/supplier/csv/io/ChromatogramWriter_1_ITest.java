@@ -11,8 +11,8 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 
-import net.chemclipse.converter.exceptions.FileIsNotWriteableException;
-import net.chemclipse.msd.converter.io.IChromatogramMSDWriter;
+import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
+import org.eclipse.chemclipse.msd.converter.io.IChromatogramMSDWriter;
 import net.openchrom.msd.converter.supplier.csv.TestPathHelper;
 
 public class ChromatogramWriter_1_ITest extends ChromatogramReaderTestCase {
