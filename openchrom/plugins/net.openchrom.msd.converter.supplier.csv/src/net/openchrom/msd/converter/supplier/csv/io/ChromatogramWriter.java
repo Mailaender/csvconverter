@@ -12,12 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.supercsv.io.CsvListWriter;
-import org.supercsv.io.ICsvListWriter;
-import org.supercsv.prefs.CsvPreference;
-
 import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
+import org.eclipse.chemclipse.converter.io.AbstractChromatogramWriter;
 import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
@@ -29,9 +25,14 @@ import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
 import org.eclipse.chemclipse.msd.model.xic.ITotalIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.TotalIonSignalExtractor;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.supercsv.io.CsvListWriter;
+import org.supercsv.io.ICsvListWriter;
+import org.supercsv.prefs.CsvPreference;
+
 import net.openchrom.msd.converter.supplier.csv.preferences.PreferenceSupplier;
 
-public class ChromatogramWriter implements IChromatogramMSDWriter {
+public class ChromatogramWriter extends AbstractChromatogramWriter implements IChromatogramMSDWriter {
 
 	public static final String RT_MILLISECONDS_COLUMN = "RT(milliseconds)";
 	public static final String RT_MINUTES_COLUMN = "RT(minutes) - NOT USED BY IMPORT";
