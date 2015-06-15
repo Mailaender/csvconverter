@@ -2,6 +2,12 @@
  * Copyright (c) 2011, 2015 Philip (eselmeister) Wenig.
  * 
  * All rights reserved.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * Philip (eselmeister) Wenig - initial API and implementation
  *******************************************************************************/
 package net.openchrom.msd.converter.supplier.csv.io;
 
@@ -14,27 +20,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.supercsv.io.CsvListReader;
-import org.supercsv.io.ICsvListReader;
-import org.supercsv.prefs.CsvPreference;
-
 import org.eclipse.chemclipse.converter.exceptions.FileIsEmptyException;
 import org.eclipse.chemclipse.converter.exceptions.FileIsNotReadableException;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.exceptions.AbundanceLimitExceededException;
 import org.eclipse.chemclipse.msd.converter.io.AbstractChromatogramMSDReader;
 import org.eclipse.chemclipse.msd.converter.io.IChromatogramMSDReader;
-import net.openchrom.msd.converter.supplier.csv.preferences.BundleProductPreferences;
-import net.openchrom.msd.converter.supplier.csv.model.VendorChromatogram;
-import net.openchrom.msd.converter.supplier.csv.model.VendorIon;
-import net.openchrom.msd.converter.supplier.csv.model.VendorScan;
 import org.eclipse.chemclipse.msd.model.core.AbstractIon;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IVendorMassSpectrum;
 import org.eclipse.chemclipse.msd.model.exceptions.IonLimitExceededException;
-import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.supercsv.io.CsvListReader;
+import org.supercsv.io.ICsvListReader;
+import org.supercsv.prefs.CsvPreference;
+
+import net.openchrom.msd.converter.supplier.csv.model.VendorChromatogram;
+import net.openchrom.msd.converter.supplier.csv.model.VendorIon;
+import net.openchrom.msd.converter.supplier.csv.model.VendorScan;
 
 /**
  * This class is responsible to read a Agilent Chromatogram from its binary
@@ -92,7 +97,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 			/*
 			 * If the chromatogram shall be exportable, set the id otherwise it is null or "".
 			 */
-			chromatogram.setConverterId(BundleProductPreferences.CONVERTER_ID);
+			chromatogram.setConverterId("");
 			chromatogram.setFile(file);
 		}
 		/*

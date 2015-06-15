@@ -2,17 +2,23 @@
  * Copyright (c) 2014, 2015 Dr. Philip Wenig.
  * 
  * All rights reserved.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * Dr. Philip Wenig - initial API and implementation
  *******************************************************************************/
 package net.openchrom.msd.converter.supplier.csv.preferences;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 
-import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
 import net.openchrom.msd.converter.supplier.csv.Activator;
 
 public class PreferenceSupplier implements IPreferenceSupplier {

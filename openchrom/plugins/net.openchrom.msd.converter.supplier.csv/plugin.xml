@@ -5,11 +5,11 @@
          point="org.eclipse.chemclipse.msd.converter.chromatogramSupplier">
       <ChromatogramSupplier
             description="Reads and Writes Chromatograms to CSV."
-            exportConverter="net.openchrom.msd.converter.supplier.csv.converter.CSVChromatogramExportConverter"
+            exportConverter="net.openchrom.msd.converter.supplier.csv.converter.ChromatogramExportConverter"
             fileExtension=".csv"
             filterName="CSV Chromatogram (*.csv)"
             id="net.openchrom.msd.converter.supplier.csv"
-            importConverter="net.openchrom.msd.converter.supplier.csv.converter.CSVChromatogramImportConverter"
+            importConverter="net.openchrom.msd.converter.supplier.csv.converter.ChromatogramImportConverter"
             isExportable="true"
             isImportable="true">
       </ChromatogramSupplier>
