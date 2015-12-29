@@ -54,7 +54,6 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 	private static final int Ion_COLUMN_START = 3;
 
 	public ChromatogramReader() {
-
 	}
 
 	@Override

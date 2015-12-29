@@ -46,7 +46,6 @@ public class ChromatogramWriter extends AbstractChromatogramWriter implements IC
 	public static final String TIC_COLUMN = "TIC";
 
 	public ChromatogramWriter() {
-
 	}
 
 	@Override
