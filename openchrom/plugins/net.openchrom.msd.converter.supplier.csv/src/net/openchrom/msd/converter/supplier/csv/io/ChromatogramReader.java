@@ -107,10 +107,6 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 		List<String> lineEntries;
 		while((lineEntries = csvListReader.read()) != null) {
 			IVendorMassSpectrum supplierMassSpectrum = getScan(lineEntries, ionsMap, overview);
-			/*
-			 * TODO setParentMassSpectrum automatisch beim Hinzufügen?
-			 */
-			supplierMassSpectrum.setParentChromatogram(chromatogram);
 			chromatogram.addScan(supplierMassSpectrum);
 		}
 		int scanDelay = chromatogram.getScan(1).getRetentionTime();
