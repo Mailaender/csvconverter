@@ -54,6 +54,5 @@
     <module>../../plugins/net.openchrom.msd.converter.supplier.csv.ui</module>
     <module>../../features/net.openchrom.msd.converter.supplier.csv.feature</module>
     <!--<module>../../plugins/net.openchrom.msd.converter.supplier.csv.fragment.test</module>-->
-    <module>../../sites/net.openchrom.msd.converter.supplier.csv.updateSite</module>
   </modules>
 </project>
