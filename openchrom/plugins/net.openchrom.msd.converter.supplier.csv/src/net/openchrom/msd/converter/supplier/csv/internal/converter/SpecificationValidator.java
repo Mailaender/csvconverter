@@ -21,7 +21,7 @@ public class SpecificationValidator {
 	private SpecificationValidator() {
 	}
 
-	public static File validateCSVSpecification(File file) {
+	public static File validateSpecification(File file) {
 
 		if(file == null) {
 			return null;

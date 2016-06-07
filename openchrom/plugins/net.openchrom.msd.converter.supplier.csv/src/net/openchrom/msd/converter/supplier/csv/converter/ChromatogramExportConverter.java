@@ -13,6 +13,7 @@ package net.openchrom.msd.converter.supplier.csv.converter;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.converter.chromatogram.IChromatogramExportConverter;
 import org.eclipse.chemclipse.converter.processing.chromatogram.ChromatogramExportConverterProcessingInfo;
 import org.eclipse.chemclipse.converter.processing.chromatogram.IChromatogramExportConverterProcessingInfo;
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -26,7 +27,7 @@ import net.openchrom.msd.converter.supplier.csv.internal.converter.Specification
 import net.openchrom.msd.converter.supplier.csv.internal.support.IConstants;
 import net.openchrom.msd.converter.supplier.csv.io.ChromatogramWriter;
 
-public class ChromatogramExportConverter extends AbstractChromatogramMSDExportConverter {
+public class ChromatogramExportConverter extends AbstractChromatogramMSDExportConverter implements IChromatogramExportConverter {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramExportConverter.class);
 	private static final String DESCRIPTION = "CSV Export Converter";
@@ -38,7 +39,7 @@ public class ChromatogramExportConverter extends AbstractChromatogramMSDExportCo
 		/*
 		 * Validate the file.
 		 */
-		file = SpecificationValidator.validateCSVSpecification(file);
+		file = SpecificationValidator.validateSpecification(file);
 		IProcessingInfo processingInfoValidate = super.validate(file);
 		/*
 		 * Don't process if errors have occurred.

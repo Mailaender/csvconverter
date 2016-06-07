@@ -10,6 +10,7 @@
             filterName="CSV Chromatogram (*.csv)"
             id="net.openchrom.msd.converter.supplier.csv"
             importConverter="net.openchrom.msd.converter.supplier.csv.converter.ChromatogramImportConverter"
+            importMagicNumberMatcher="net.openchrom.msd.converter.supplier.csv.converter.MagicNumberMatcher"
             isExportable="true"
             isImportable="true">
       </ChromatogramSupplier>

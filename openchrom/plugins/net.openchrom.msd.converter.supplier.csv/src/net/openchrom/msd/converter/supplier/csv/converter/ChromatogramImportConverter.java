@@ -13,6 +13,7 @@ package net.openchrom.msd.converter.supplier.csv.converter;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.converter.chromatogram.IChromatogramImportConverter;
 import org.eclipse.chemclipse.converter.processing.chromatogram.ChromatogramOverviewImportConverterProcessingInfo;
 import org.eclipse.chemclipse.converter.processing.chromatogram.IChromatogramOverviewImportConverterProcessingInfo;
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -29,7 +30,7 @@ import net.openchrom.msd.converter.supplier.csv.internal.converter.Specification
 import net.openchrom.msd.converter.supplier.csv.internal.support.IConstants;
 import net.openchrom.msd.converter.supplier.csv.io.ChromatogramReader;
 
-public class ChromatogramImportConverter extends AbstractChromatogramMSDImportConverter {
+public class ChromatogramImportConverter extends AbstractChromatogramMSDImportConverter implements IChromatogramImportConverter {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramImportConverter.class);
 	private static final String DESCRIPTION = "CSV Import Converter";
@@ -48,7 +49,7 @@ public class ChromatogramImportConverter extends AbstractChromatogramMSDImportCo
 			/*
 			 * Read the chromatogram.
 			 */
-			file = SpecificationValidator.validateCSVSpecification(file);
+			file = SpecificationValidator.validateSpecification(file);
 			IChromatogramMSDReader reader = new ChromatogramReader();
 			monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM);
 			try {
@@ -77,7 +78,7 @@ public class ChromatogramImportConverter extends AbstractChromatogramMSDImportCo
 			/*
 			 * Read the chromatogram overview.
 			 */
-			file = SpecificationValidator.validateCSVSpecification(file);
+			file = SpecificationValidator.validateSpecification(file);
 			IChromatogramMSDReader reader = new ChromatogramReader();
 			monitor.subTask(IConstants.IMPORT_CSV_CHROMATOGRAM_OVERVIEW);
 			try {
